@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immerscharf • Tor Relay</title>
     <meta name="description" content="Official fingerprint proof for the Immerscharf Tor Relay.">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
@@ -14,10 +13,17 @@
             --accent: #10b981;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', system_ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: #0a0a0a;
             color: #e4e4e7;
+            line-height: 1.6;
         }
 
         .font-display {
@@ -26,84 +32,243 @@
             letter-spacing: -0.04em;
         }
 
-        .glass {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        nav {
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
         }
 
-        .section-header {
-            font-size: 2.5rem;
-            line-height: 1.05;
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #10b981;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.03em;
         }
 
-        .modern-card {
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                       box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
-        .modern-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .neon-button {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
         }
 
-        .neon-button:hover {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-            transform: translateY(-1px);
+        .nav-links a {
+            color: #e4e4e7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
         }
 
-        .fingerprint-box {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            background: #111113;
-            border: 1px solid #27272a;
-        }
-
-        .nav-link {
-            transition: color 0.2s ease;
-        }
-        
-        .nav-link:hover {
+        .nav-links a:hover {
             color: #10b981;
         }
 
-        .step-card {
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        /* Hero */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 24px;
+        }
+
+        .hero .gradient {
+            background: linear-gradient(90deg, #10b981, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #a1a1aa;
+            max-width: 480px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e4e4e7;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Cards */
+        .glass {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 48px;
+        }
+
+        .section-header {
+            font-size: 42px;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+        }
+
+        /* Fingerprint Box */
+        .fingerprint-box {
+            background: #111113;
+            border: 1px solid #27272a;
+            border-radius: 16px;
+            padding: 24px;
+            font-family: ui-monospace, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #10b981;
+            word-break: break-all;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: transform 0.2s;
+        }
+
+        .step:hover {
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
     <!-- NAVBAR -->
-    <nav class="border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl fixed w-full z-50">
-        <div class="max-w-screen-xl mx-auto px-6">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center gap-x-2">
-                        <div class="w-9 h-9 rounded-2xl bg-emerald-500 flex items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
-                        </div>
-                        <span class="font-display text-2xl font-semibold tracking-tighter">immerscharf</span>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
                     </div>
-                    <div class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium flex items-center gap-x-1.5 border border-emerald-500/20">
-                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <span class="font-mono text-[10px]">ONLINE</span>
-                    </div>
+                    <span class="logo-text">immerscharf</span>
                 </div>
 
-                <div class="hidden md:flex items-center gap-x-8 text-sm">
-                    <a href="#fingerprint" class="nav-link">Fingerprint</a>
-                    <a href="#verify" class="nav-link">Verify</a>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank" class="nav-link">.well-known</a>
+                <div class="nav-links">
+                    <a href="#fingerprint">Fingerprint</a>
+                    <a href="#verify">Verify</a>
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank">.well-known</a>
                 </div>
 
-                <a href="https://github.com/immerscharf" target="_blank"
-                   class="flex items-center gap-x-2 px-5 py-2 rounded-2xl border border-white/20 hover:bg-white/5 transition-all text-sm font-medium">
+                <a href="https://github.com/immerscharf" target="_blank" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;">
                     <i class="fa-brands fa-github"></i>
                     <span>GitHub</span>
                 </a>
@@ -112,44 +277,36 @@
     </nav>
 
     <!-- HERO -->
-    <div class="pt-16">
-        <div class="max-w-screen-xl mx-auto px-6 pt-24 pb-20">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/5 border border-white/10 mb-8">
-                    <span class="text-sm font-medium">Tor Relay • Active since 2024</span>
+    <div class="hero">
+        <div class="container">
+            <div style="max-width: 620px;">
+                <div class="status" style="margin-bottom: 32px; width: fit-content;">
+                    <div class="status-dot"></div>
+                    <span>Tor Relay • Active since 2024</span>
                 </div>
 
-                <h1 class="font-display text-7xl md:text-7xl leading-none tracking-tighter font-semibold mb-6">
-                    IMMERSCHARF<br>
-                    <span class="bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">TOR RELAY</span>
-                </h1>
+                <h1>IMMERSCHARF<br><span class="gradient">TOR RELAY</span></h1>
                 
-                <p class="text-2xl text-zinc-400 max-w-lg mb-10 leading-tight">
-                    Official fingerprint proof.<br>
-                    100% transparent. 100% trustworthy.
-                </p>
+                <p>Official fingerprint proof.<br>100% transparent. 100% trustworthy.</p>
 
-                <div class="flex flex-wrap gap-4">
-                    <a href="#fingerprint" 
-                       class="neon-button inline-flex items-center justify-center gap-x-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 h-14 rounded-3xl text-lg shadow-xl shadow-emerald-500/30">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#fingerprint" class="btn btn-primary">
                         <span>View Fingerprint</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank"
-                       class="inline-flex items-center justify-center gap-x-3 border border-white/30 hover:bg-white/5 px-8 h-14 rounded-3xl text-lg font-medium transition-colors">
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" class="btn btn-secondary">
                         <i class="fa-solid fa-download"></i>
                         <span>Download</span>
                     </a>
                 </div>
-                
-                <div class="mt-8 flex items-center gap-x-3 text-sm text-zinc-500">
-                    <div class="flex -space-x-2">
-                        <div class="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center ring-1 ring-white/10">
-                            <i class="fa-solid fa-lock text-xs"></i>
+
+                <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px; color: #71717a; font-size: 14px;">
+                    <div style="display: flex; gap: -8px;">
+                        <div style="width: 24px; height: 24px; background: #27272a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #18181b;">
+                            <i class="fa-solid fa-lock" style="font-size: 11px;"></i>
                         </div>
-                        <div class="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center ring-1 ring-white/10">
-                            <i class="fa-solid fa-shield text-xs"></i>
+                        <div style="width: 24px; height: 24px; background: #27272a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #18181b;">
+                            <i class="fa-solid fa-shield" style="font-size: 11px;"></i>
                         </div>
                     </div>
                     <span>Verified by the Tor Network</span>
@@ -159,250 +316,169 @@
     </div>
 
     <!-- ABOUT -->
-    <div class="max-w-screen-xl mx-auto px-6 pb-16">
-        <div class="grid md:grid-cols-2 gap-x-16 gap-y-8 items-center">
+    <div class="container" style="padding-bottom: 80px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
             <div>
-                <div class="uppercase tracking-[2px] text-xs font-semibold text-emerald-400 mb-3">WHY THIS PAGE?</div>
+                <div style="color: #10b981; font-size: 11px; letter-spacing: 2px; margin-bottom: 12px;">WHY THIS PAGE?</div>
                 <h2 class="section-header">The official proof<br>for my Tor Relay</h2>
             </div>
-            <div class="text-lg text-zinc-400">
-                This page is the <strong class="text-white">single source of truth</strong> for the fingerprints of my Tor relay. 
-                Anyone can verify at any time that the published fingerprints truly belong to <span class="font-mono text-emerald-400">Immerscharf</span>.
+            <div style="color: #a1a1aa; font-size: 17px;">
+                This page is the <strong style="color: white;">single source of truth</strong> for the fingerprints of my Tor relay. 
+                Anyone can verify at any time that the published fingerprints truly belong to <span style="font-family: monospace; color: #10b981;">Immerscharf</span>.
             </div>
         </div>
     </div>
 
-    <!-- FINGERPRINT SECTION -->
-    <div id="fingerprint" class="max-w-screen-xl mx-auto px-6 pb-20">
-        <div class="glass rounded-3xl p-8 md:p-12">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-6 mb-8">
+    <!-- FINGERPRINT -->
+    <div id="fingerprint" class="container" style="padding-bottom: 80px;">
+        <div class="glass">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 20px;">
                 <div>
-                    <div class="flex items-center gap-x-4 mb-2">
-                        <i class="fa-solid fa-fingerprint text-4xl text-emerald-400"></i>
-                        <span class="font-display text-4xl font-semibold tracking-tight">RSA Fingerprint</span>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <i class="fa-solid fa-fingerprint" style="font-size: 36px; color: #10b981;"></i>
+                        <span style="font-size: 36px; font-weight: 700; letter-spacing: -0.03em;">RSA Fingerprint</span>
                     </div>
-                    <p class="text-zinc-400">rsa-fingerprint.txt • .well-known/tor-relay</p>
+                    <p style="color: #71717a;">rsa-fingerprint.txt • .well-known/tor-relay</p>
                 </div>
                 
-                <div class="flex gap-x-3">
-                    <button onclick="copyFingerprintURL()" 
-                            class="flex items-center gap-x-2 px-6 h-12 rounded-2xl border border-white/20 hover:bg-white/5 transition-all text-sm font-medium">
+                <div style="display: flex; gap: 12px;">
+                    <button onclick="copyFingerprintURL()" class="btn btn-secondary" style="padding: 12px 24px; font-size: 14px;">
                         <i class="fa-solid fa-link"></i>
                         <span>Copy Link</span>
                     </button>
-                    
-                    <button onclick="loadAndCopyFingerprint()" 
-                            class="flex items-center gap-x-2 px-6 h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600 transition-all text-sm font-semibold text-white">
+                    <button onclick="loadAndCopyFingerprint()" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px;">
                         <i class="fa-solid fa-copy"></i>
                         <span>Copy Fingerprint</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Fingerprint Display -->
-            <div class="fingerprint-box rounded-2xl p-6 relative">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-x-2 text-xs uppercase tracking-[1px] text-emerald-400 font-medium">
-                        <i class="fa-solid fa-terminal"></i>
-                        <span>CURRENT FINGERPRINT</span>
-                    </div>
-                    <button onclick="loadFingerprint()" 
-                            class="flex items-center gap-x-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                        <i class="fa-solid fa-sync-alt"></i>
-                        <span>Reload</span>
-                    </button>
-                </div>
-                
-                <pre id="fingerprint-content" 
-                     class="text-emerald-300 text-sm whitespace-pre-wrap break-all min-h-[70px] leading-relaxed">Click "Copy Fingerprint" or reload to load the latest value...</pre>
+            <div class="fingerprint-box" id="fingerprint-content">
+                Click "Copy Fingerprint" or reload to load the latest value...
             </div>
             
-            <div class="mt-4 text-xs text-zinc-500 flex items-center gap-x-2">
+            <div style="margin-top: 16px; font-size: 12px; color: #52525b; display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-info-circle"></i>
-                <span>This file is served directly from <span class="font-mono">immerscharf.github.io</span></span>
+                <span>This file is served directly from <span style="font-family: monospace;">immerscharf.github.io</span></span>
             </div>
         </div>
     </div>
 
     <!-- HOW TO VERIFY -->
-    <div id="verify" class="max-w-screen-xl mx-auto px-6 pb-20">
-        <div class="text-center mb-12">
-            <span class="px-5 py-1.5 bg-white/5 text-xs rounded-3xl border border-white/10 tracking-wider">HOW IT WORKS</span>
-            <h2 class="section-header mt-5">How to verify the fingerprint</h2>
+    <div id="verify" class="container" style="padding-bottom: 100px;">
+        <div style="text-align: center; margin-bottom: 48px;">
+            <div style="display: inline-block; background: rgba(255,255,255,0.05); padding: 6px 20px; border-radius: 9999px; font-size: 11px; letter-spacing: 1.5px; border: 1px solid rgba(255,255,255,0.1);">HOW IT WORKS</div>
+            <h2 class="section-header" style="margin-top: 20px;">How to verify the fingerprint</h2>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
             <!-- Step 1 -->
-            <div class="modern-card glass rounded-3xl p-8 step-card">
-                <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
-                    <span class="font-mono text-emerald-400 font-bold text-2xl">01</span>
-                </div>
-                <h3 class="font-semibold text-2xl mb-3">Download the fingerprint</h3>
-                <p class="text-zinc-400">Download the file <span class="font-mono text-xs bg-zinc-900 px-2 py-0.5 rounded">rsa-fingerprint.txt</span> directly from this page.</p>
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">Download the fingerprint</h3>
+                <p style="color: #a1a1aa;">Download the file <span style="font-family: monospace; background: #111113; padding: 2px 6px; border-radius: 4px;">rsa-fingerprint.txt</span> directly from this page.</p>
             </div>
 
             <!-- Step 2 -->
-            <div class="modern-card glass rounded-3xl p-8 step-card">
-                <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
-                    <span class="font-mono text-emerald-400 font-bold text-2xl">02</span>
-                </div>
-                <h3 class="font-semibold text-2xl mb-3">Add it to torrc</h3>
-                <p class="text-zinc-400">Paste the fingerprint into your <span class="font-mono">torrc</span> configuration file.</p>
-                <div class="mt-5 text-xs bg-zinc-900 p-3 rounded-xl font-mono border border-white/10 text-emerald-300">
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">Add it to torrc</h3>
+                <p style="color: #a1a1aa;">Paste the fingerprint into your <span style="font-family: monospace;">torrc</span> configuration file.</p>
+                <div style="margin-top: 20px; background: #111113; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 13px; color: #10b981;">
                     MyFamily &lt;FINGERPRINT&gt;
                 </div>
             </div>
 
             <!-- Step 3 -->
-            <div class="modern-card glass rounded-3xl p-8 step-card">
-                <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
-                    <span class="font-mono text-emerald-400 font-bold text-2xl">03</span>
-                </div>
-                <h3 class="font-semibold text-2xl mb-3">Check on Tor Metrics</h3>
-                <p class="text-zinc-400">Go to <a href="https://metrics.torproject.org/" target="_blank" class="text-emerald-400 underline">metrics.torproject.org</a> and search for your relay.</p>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3 style="font-size: 22px; margin-bottom: 12px;">Check on Tor Metrics</h3>
+                <p style="color: #a1a1aa;">Go to <a href="https://metrics.torproject.org/" target="_blank" style="color: #10b981; text-decoration: underline;">metrics.torproject.org</a> and search for your relay.</p>
                 
-                <a href="https://metrics.torproject.org/rs.html" target="_blank" 
-                   class="inline-flex items-center text-sm text-emerald-400 hover:text-emerald-300 mt-5 group">
-                    Open Relay Search 
-                    <i class="fa-solid fa-external-link-alt ml-2 text-xs group-hover:translate-x-0.5 transition"></i>
+                <a href="https://metrics.torproject.org/rs.html" target="_blank" style="display: inline-flex; align-items: center; margin-top: 20px; color: #10b981; text-decoration: none; font-size: 14px;">
+                    Open Relay Search <i class="fa-solid fa-external-link-alt" style="margin-left: 6px; font-size: 12px;"></i>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- FINAL CTA -->
-    <div class="border-t border-white/10 bg-zinc-900/60">
-        <div class="max-w-screen-xl mx-auto px-6 py-20 text-center">
-            <div class="max-w-md mx-auto">
-                <div class="mx-auto w-16 h-16 rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center mb-8">
-                    <i class="fa-solid fa-globe text-4xl text-zinc-950"></i>
+    <div style="background: #111113; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container" style="padding: 80px 24px; text-align: center;">
+            <div style="max-width: 420px; margin: 0 auto;">
+                <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #14b8a6); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px;">
+                    <i class="fa-solid fa-globe" style="font-size: 32px; color: #0a0a0a;"></i>
                 </div>
                 
-                <h3 class="font-display text-3xl tracking-tight mb-4">Thank you for supporting<br>the Tor network.</h3>
-                <p class="text-zinc-400 text-lg">Every relay counts. Your contribution makes the internet more private and free.</p>
+                <h3 style="font-size: 28px; line-height: 1.2; margin-bottom: 16px;">Thank you for supporting<br>the Tor network.</h3>
+                <p style="color: #a1a1aa; font-size: 17px;">Every relay counts. Your contribution makes the internet more private and free.</p>
                 
-                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://www.torproject.org/" target="_blank"
-                       class="px-8 py-3.5 rounded-2xl border border-white/20 hover:bg-white/5 transition-colors text-sm font-medium">
-                        Learn more about Tor
-                    </a>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank"
-                       class="px-8 py-3.5 rounded-2xl bg-white text-zinc-950 text-sm font-semibold flex items-center justify-center gap-x-2 hover:bg-zinc-100 transition-colors">
-                        <span>Browse all files</span>
-                    </a>
+                <div style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://www.torproject.org/" target="_blank" class="btn btn-secondary">Learn more about Tor</a>
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank" class="btn btn-primary">Browse all files</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="border-t border-white/10 py-8 bg-zinc-950">
-        <div class="max-w-screen-xl mx-auto px-6 text-xs text-zinc-500 flex flex-col md:flex-row items-center justify-between gap-y-3">
+    <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 32px 0; background: #0a0a0a;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #52525b; flex-wrap: wrap; gap: 16px;">
             <div>© 2026 Immerscharf Tor Relay • Made with ❤️ for privacy</div>
-            <div class="flex items-center gap-x-6">
-                <a href="#" class="hover:text-white transition-colors">Imprint</a>
-                <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                <a href="https://github.com/immerscharf/immerscharf.github.io" target="_blank" class="hover:text-white transition-colors">Source Code</a>
+            <div style="display: flex; gap: 24px;">
+                <a href="#" style="color: #52525b; text-decoration: none;">Imprint</a>
+                <a href="#" style="color: #52525b; text-decoration: none;">Privacy</a>
+                <a href="https://github.com/immerscharf/immerscharf.github.io" target="_blank" style="color: #52525b; text-decoration: none;">Source</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Tailwind config (safe even if CDN is slow)
-        function initTailwind() {
-            if (typeof tailwind !== 'undefined') {
-                tailwind.config = {
-                    theme: {
-                        extend: {
-                            fontFamily: {
-                                'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
-                            }
-                        }
-                    }
-                };
-            }
-        }
-
-        // Load fingerprint
         async function loadFingerprint() {
             const container = document.getElementById('fingerprint-content');
-            container.innerHTML = '<span class="text-emerald-400">Loading fingerprint...</span>';
+            container.innerHTML = '<span style="color:#10b981">Loading fingerprint...</span>';
             
             try {
-                const response = await fetch('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt');
-                if (!response.ok) throw new Error();
-                
-                const text = await response.text();
-                const clean = text.trim();
-                container.innerHTML = `<span class="text-emerald-300">${clean}</span>`;
-                container.dataset.fingerprint = clean;
+                const res = await fetch('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt');
+                const text = await res.text();
+                container.innerHTML = text.trim();
+                container.dataset.fp = text.trim();
             } catch (e) {
-                container.innerHTML = `
-                    <span class="text-amber-400">Could not load automatically.</span><br>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" class="underline text-emerald-400">→ Open directly</a>
-                `;
+                container.innerHTML = 'Could not load automatically. <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" style="color:#10b981">Open directly →</a>';
             }
         }
 
         function copyFingerprintURL() {
-            const url = 'https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt';
-            navigator.clipboard.writeText(url).then(() => {
-                showToast('Link copied to clipboard!');
-            }).catch(() => {
-                prompt('Copy this link:', url);
-            });
+            navigator.clipboard.writeText('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt')
+                .then(() => showToast('Link copied!'));
         }
 
         async function loadAndCopyFingerprint() {
             const container = document.getElementById('fingerprint-content');
+            if (!container.dataset.fp) await loadFingerprint();
             
-            if (!container.dataset.fingerprint) {
-                await loadFingerprint();
-            }
-            
-            const fp = container.dataset.fingerprint || container.textContent.trim();
-            
-            if (fp && !fp.includes('Loading') && !fp.includes('Could not')) {
-                navigator.clipboard.writeText(fp).then(() => {
-                    showToast('Fingerprint copied to clipboard!');
-                }).catch(() => {
-                    prompt('Copy this fingerprint:', fp);
-                });
-            } else {
-                showToast('Please reload the fingerprint first');
-            }
+            const fp = container.dataset.fp || container.textContent.trim();
+            navigator.clipboard.writeText(fp).then(() => showToast('Fingerprint copied!'));
         }
 
-        function showToast(message) {
+        function showToast(msg) {
             const toast = document.createElement('div');
-            toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#10b981;color:white;padding:14px 24px;border-radius:9999px;box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.3);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;z-index:99999;';
-            toast.innerHTML = `
-                <i class="fa-solid fa-check"></i>
-                <span>${message}</span>
-            `;
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>${msg}</span>`;
             document.body.appendChild(toast);
-            
             setTimeout(() => {
-                toast.style.transition = 'all 0.3s ease';
+                toast.style.transition = 'all 0.3s';
                 toast.style.opacity = '0';
-                toast.style.transform = 'translate(-50%, 20px)';
-                setTimeout(() => toast.parentNode.removeChild(toast), 300);
-            }, 2300);
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
         }
 
-        // Initialize
-        function init() {
-            initTailwind();
-            
-            // Auto load fingerprint
-            setTimeout(() => {
-                const container = document.getElementById('fingerprint-content');
-                if (container && container.textContent.includes('Click')) {
-                    loadFingerprint();
-                }
-            }, 600);
-        }
-
-        window.onload = init;
+        // Auto-load fingerprint
+        setTimeout(() => {
+            const el = document.getElementById('fingerprint-content');
+            if (el && el.textContent.includes('Click')) {
+                loadFingerprint();
+            }
+        }, 700);
     </script>
 </body>
 </html>
