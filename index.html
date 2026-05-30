@@ -1,11 +1,343 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <title>Immerscharf Tor Relais</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immerscharf • Tor Relais</title>
+    <meta name="description" content="Offizieller Fingerprint-Nachweis für das Immerscharf Tor-Relais.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --accent: #10b981;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgb(16 185 129 / 0.5);
+        }
+
+        .glass {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .fingerprint-box {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tor-grid {
+            background-image: 
+                linear-gradient(rgba(16,185,129,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16,185,129,0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .relay-badge {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+        }
+
+        .nav-active {
+            color: #10b981;
+            position: relative;
+        }
+        
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #10b981, transparent);
+        }
+    </style>
 </head>
-<body>
-  <h1>Immerscharf Tor Relais</h1>
-  <p>The officiall AROI proof for the Immerscharf Relais.</p>
-  <p> You are probably searching for my Fingerprints... You will find them here: https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt</p>
-</body>
-</html>
+<body class="bg-zinc-950 text-zinc-200">
+    <!-- NAVBAR -->
+    <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl fixed w-full z-50">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-x-3">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-9 h-9 rounded-2xl bg-emerald-500 flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl font-semibold tracking-tighter">immerscharf</span>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium flex items-center gap-x-1.5">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="font-mono text-[10px]">ONLINE</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-x-8 text-sm">
+                    <a href="#fingerprint" class="hover:text-emerald-400 transition-colors">Fingerprint</a>
+                    <a href="#verify" class="hover:text-emerald-400 transition-colors">Verifizieren</a>
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank" 
+                       class="hover:text-emerald-400 transition-colors">.well-known</a>
+                    
+                    <a href="https://github.com/immerscharf" target="_blank"
+                       class="flex items-center gap-x-2 px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/5 transition-all text-sm">
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="pt-16">
+        <div class="max-w-screen-xl mx-auto px-6 pt-20 pb-16">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/5 border border-white/10 mb-6">
+                    <div class="flex items-center gap-x-2 text-sm">
+                        <i class="fa-solid fa-globe text-emerald-400"></i>
+                        <span class="font-medium">Tor Relay • Since 2024</span>
+                    </div>
+                </div>
+
+                <h1 class="font-display text-7xl leading-[1.05] tracking-tighter font-semibold mb-6">
+                    IMMERSCHARF<br>
+                    <span class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">TOR RELAIS</span>
+                </h1>
+                
+                <p class="text-2xl text-zinc-400 max-w-lg mb-10">
+                    Offizieller Fingerprint-Nachweis.<br>
+                    100% transparent. 100% vertrauenswürdig.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#fingerprint" 
+                       class="group inline-flex items-center justify-center gap-x-3 bg-emerald-500 hover:bg-emerald-600 transition-all text-white font-semibold px-8 h-14 rounded-3xl text-lg shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 active:scale-[0.985]">
+                        <span>Fingerprint ansehen</span>
+                        <i class="fa-solid fa-arrow-right group-active:translate-x-0.5 transition"></i>
+                    </a>
+                    
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank"
+                       class="inline-flex items-center justify-center gap-x-3 border border-white/30 hover:bg-white/5 transition-all px-8 h-14 rounded-3xl text-lg font-medium">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Direkt herunterladen</span>
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-x-4 text-sm text-zinc-500">
+                    <div class="flex -space-x-2">
+                        <div class="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center"><i class="fa-solid fa-lock text-xs"></i></div>
+                        <div class="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center"><i class="fa-solid fa-shield text-xs"></i></div>
+                    </div>
+                    <span>Verifiziert durch das Tor-Netzwerk</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="max-w-screen-xl mx-auto px-6 pb-16">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <div class="uppercase tracking-[3px] text-xs font-semibold text-emerald-400 mb-3">WARUM DIES SEITE?</div>
+                <h2 class="section-header">Der offizielle<br>Nachweis für mein Relais</h2>
+            </div>
+            <div class="text-lg text-zinc-400 pt-2">
+                Diese Seite dient als <strong class="text-white">einzelne Quelle der Wahrheit</strong> für die Fingerprints meines Tor-Relais. 
+                Jeder kann hier jederzeit prüfen, dass die veröffentlichten Fingerprints wirklich zu <span class="font-mono text-emerald-400">Immerscharf</span> gehören.
+            </div>
+        </div>
+    </div>
+
+    <!-- FINGERPRINT SECTION -->
+    <div id="fingerprint" class="max-w-screen-xl mx-auto px-6 pb-20">
+        <div class="glass border border-white/10 rounded-3xl p-8 md:p-12">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-8">
+                <div>
+                    <div class="flex items-center gap-x-3 mb-2">
+                        <i class="fa-solid fa-fingerprint text-3xl text-emerald-400"></i>
+                        <span class="font-display text-4xl font-semibold tracking-tight">RSA Fingerprint</span>
+                    </div>
+                    <p class="text-zinc-400">rsa-fingerprint.txt • .well-known/tor-relay</p>
+                </div>
+                
+                <div class="flex gap-x-3">
+                    <button onclick="copyFingerprintURL()" 
+                            class="flex items-center gap-x-2 px-5 h-11 rounded-2xl border border-white/20 hover:bg-white/5 transition-all text-sm font-medium">
+                        <i class="fa-solid fa-link"></i>
+                        <span>Link kopieren</span>
+                    </button>
+                    
+                    <button onclick="loadAndCopyFingerprint()" 
+                            class="flex items-center gap-x-2 px-5 h-11 rounded-2xl bg-emerald-500 hover:bg-emerald-600 transition-all text-sm font-semibold text-white">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Fingerprint kopieren</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fingerprint Display -->
+            <div class="bg-zinc-900 border border-white/10 rounded-2xl p-6 font-mono text-sm relative group">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-x-2 text-xs uppercase tracking-widest text-emerald-400">
+                        <i class="fa-solid fa-terminal"></i>
+                        <span>AKTUELLER FINGERPRINT</span>
+                    </div>
+                    <div onclick="loadFingerprint()" 
+                         class="cursor-pointer text-xs flex items-center gap-x-1.5 text-emerald-400 hover:text-emerald-300 transition-colors">
+                        <i class="fa-solid fa-sync-alt"></i>
+                        <span>Neu laden</span>
+                    </div>
+                </div>
+                
+                <pre id="fingerprint-content" 
+                     class="fingerprint-box text-emerald-300 whitespace-pre-wrap break-all min-h-[68px] p-4 bg-black/50 rounded-xl border border-white/10">Klicke auf "Fingerprint kopieren" oder lade die Datei...</pre>
+            </div>
+            
+            <div class="mt-4 text-xs text-zinc-500 flex items-center gap-x-2">
+                <i class="fa-solid fa-info-circle"></i>
+                <span>Diese Datei wird direkt von <span class="font-mono">immerscharf.github.io</span> geladen und ist die einzige autoritative Quelle.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW TO VERIFY -->
+    <div id="verify" class="max-w-screen-xl mx-auto px-6 pb-20">
+        <div class="text-center mb-12">
+            <span class="px-4 py-1 bg-white/5 text-xs rounded-3xl border border-white/10">SO FUNKTIONIERT'S</span>
+            <h2 class="section-header mt-4">Wie du den Fingerprint<br>verifizierst</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Step 1 -->
+            <div class="glass border border-white/10 rounded-3xl p-8">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                    <span class="font-mono text-emerald-400 font-bold text-xl">01</span>
+                </div>
+                <h3 class="font-semibold text-xl mb-3">Fingerprint herunterladen</h3>
+                <p class="text-zinc-400">Lade die Datei <span class="font-mono text-xs bg-zinc-900 px-1.5 py-px rounded">rsa-fingerprint.txt</span> direkt von dieser Seite oder über den direkten Link.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="glass border border-white/10 rounded-3xl p-8">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                    <span class="font-mono text-emerald-400 font-bold text-xl">02</span>
+                </div>
+                <h3 class="font-semibold text-xl mb-3">In torrc eintragen</h3>
+                <p class="text-zinc-400">Füge den Fingerprint in deine <span class="font-mono">torrc</span> ein oder nutze ihn für Bridge- oder Relay-Konfigurationen.</p>
+                <div class="mt-4 text-xs bg-zinc-900 p-3 rounded-xl font-mono border border-white/10">
+                    MyFamily &lt;FINGERPRINT&gt;
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="glass border border-white/10 rounded-3xl p-8">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                    <span class="font-mono text-emerald-400 font-bold text-xl">03</span>
+                </div>
+                <h3 class="font-semibold text-xl mb-3">Im Atlas prüfen</h3>
+                <p class="text-zinc-400">Gehe auf <a href="https://metrics.torproject.org/" target="_blank" class="text-emerald-400 underline">metrics.torproject.org</a> und suche nach deinem Relay-Namen oder Fingerprint.</p>
+                <div class="mt-4">
+                    <a href="https://metrics.torproject.org/rs.html" target="_blank" 
+                       class="inline-flex items-center text-sm text-emerald-400 hover:text-emerald-300">
+                        Zum Relay Search <i class="fa-solid fa-external-link-alt ml-1.5 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="border-t border-white/10 bg-zinc-900/50">
+        <div class="max-w-screen-xl mx-auto px-6 py-16 text-center">
+            <div class="max-w-md mx-auto">
+                <div class="mx-auto w-16 h-16 rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-globe text-4xl text-zinc-950"></i>
+                </div>
+                <h3 class="font-display text-3xl tracking-tight mb-4">Danke, dass du das Tor-Netzwerk unterstützt.</h3>
+                <p class="text-zinc-400">Jedes Relay zählt. Dein Beitrag macht das Internet freier und privater.</p>
+                
+                <div class="mt-8 flex justify-center gap-x-4">
+                    <a href="https://www.torproject.org/" target="_blank"
+                       class="px-6 py-3 rounded-2xl border border-white/20 text-sm hover:bg-white/5 transition-colors">Mehr über Tor</a>
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank"
+                       class="px-6 py-3 rounded-2xl bg-white text-zinc-950 text-sm font-semibold flex items-center gap-x-2 hover:bg-zinc-200 transition-colors">
+                        <span>Alle Dateien ansehen</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-white/10 py-8">
+        <div class="max-w-screen-xl mx-auto px-6 text-xs text-zinc-500 flex flex-col md:flex-row items-center justify-between gap-y-2">
+            <div>© 2026 Immerscharf Tor Relais • Made with ❤️ for privacy</div>
+            <div class="flex items-center gap-x-5">
+                <a href="#" class="hover:text-white transition-colors">Impressum</a>
+                <a href="#" class="hover:text-white transition-colors">Datenschutz</a>
+                <a href="https://github.com/immerscharf/immerscharf.github.io" target="_blank" class="hover:text-white transition-colors">Source</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#10b981');
+        }
+
+        // Load fingerprint from GitHub Pages
+        async function loadFingerprint() {
+            const container = document.getElementById('fingerprint-content');
+            container.innerHTML = '<span class="text-emerald-400">Lade Fingerprint...</span>';
+            
+            try {
+                const response = await fetch('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                
+                const text = await response.text();
+                const cleanText = text.trim();
+                
+                container.innerHTML = `<span class="text-emerald-300">${cleanText}</span>`;
+                container.dataset.fingerprint = cleanText;
+            } catch (error) {
+                container.innerHTML = `
+                    <span class="text-amber-400">Konnte nicht automatisch laden.</span><br>
+                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" class="underline text-emerald-400">→ Direkt öffnen</a>
+                `;
+            }
+        }
+
+        // Copy full URL
+        function copyFingerprintURL() {
+            const url = 'https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt';
+            navigator.clipboard.writeText(url).then(() => {
+                const originalText = event.currentTarget?.innerHTML || '';
+                showToast('Link in die Zwischenablage kopiert!');
+           
