@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Immerscharf · vier Tor-Relais</title>
-  <meta name="description" content="Live-Übersicht der vier Immerscharf-Tor-Relais: Fingerprints, Adressen, Auslastung und geschriebene Daten von Onionoo.">
+  <title>Immerscharf · four Tor relays</title>
+  <meta name="description" content="Live overview of the four Immerscharf Tor relays: fingerprints, addresses, utilization, and bytes written, from Onionoo.">
   <meta name="theme-color" content="#12140f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2312140f' width='32' height='32'/%3E%3Crect fill='%23e2ff6a' x='4' y='18' width='4' height='10'/%3E%3Crect fill='%23e2ff6a' x='11' y='12' width='4' height='16'/%3E%3Crect fill='%23e2ff6a' x='18' y='6' width='4' height='22'/%3E%3Crect fill='%23e2ff6a' x='25' y='14' width='4' height='14'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
@@ -256,49 +256,49 @@
         <strong>immerscharf</strong>
       </a>
       <nav>
-        <a href="#board">Relais</a>
+        <a href="#board">Relays</a>
         <a href="#proof">Fingerprints</a>
-        <a href="https://github.com/Immerscharf/Immerscharf.github.io">Quelltext</a>
-        <button class="reload" id="reload" type="button">Aktualisieren</button>
+        <a href="https://github.com/Immerscharf/Immerscharf.github.io">Source</a>
+        <button class="reload" id="reload" type="button">Refresh</button>
       </nav>
     </div>
   </header>
 
   <main id="top" class="wrap">
     <section class="hero">
-      <p class="kicker">Tor-Family</p>
-      <h1>Vier Tor-Relais</h1>
-      <p class="lede">Nickname, Fingerprint, Adressen, Auslastung und geschriebene Daten der vier Relais. Die Zahlen kommen direkt von Onionoo und bleiben damit auf dem Stand des Tor-Projekts.</p>
-      <p class="meta-line" id="stamp">Onionoo wird geladen …</p>
+      <p class="kicker">Tor family</p>
+      <h1>Four Tor relays</h1>
+      <p class="lede">Nicknames, fingerprints, addresses, utilization, and bytes written for the four relays. The figures come straight from Onionoo and stay current with the Tor Project.</p>
+      <p class="meta-line" id="stamp">Loading Onionoo …</p>
       <p id="error" hidden></p>
     </section>
 
-    <section class="stats" aria-label="Family gesamt">
-      <article class="stat"><span>Online</span><b id="s-online">…</b><small id="s-online-sub">von 4 Relais</small></article>
-      <article class="stat"><span>Auslastung</span><b id="s-util">…</b><small id="s-util-sub">beobachtet / gesetzte Rate</small></article>
-      <article class="stat"><span>Geschrieben, 1 Monat</span><b id="s-month">…</b><small id="s-month-sub">Summe der Tageshistorie</small></article>
-      <article class="stat"><span>Geschrieben, erfasst</span><b id="s-life">…</b><small id="s-life-sub">längste Historie je Relais</small></article>
+    <section class="stats" aria-label="Family totals">
+      <article class="stat"><span>Online</span><b id="s-online">…</b><small id="s-online-sub">of 4 relays</small></article>
+      <article class="stat"><span>Utilization</span><b id="s-util">…</b><small id="s-util-sub">observed / configured rate</small></article>
+      <article class="stat"><span>Written, 1 month</span><b id="s-month">…</b><small id="s-month-sub">sum of the daily history</small></article>
+      <article class="stat"><span>Written, recorded</span><b id="s-life">…</b><small id="s-life-sub">longest history per relay</small></article>
     </section>
     <div id="meters"></div>
 
     <section id="board">
-      <h2>Übersicht</h2>
+      <h2>Overview</h2>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Relais</th>
+              <th>Relay</th>
               <th>Status</th>
-              <th>Land</th>
+              <th>Country</th>
               <th>IPv4</th>
-              <th class="num">Beobachtet</th>
-              <th class="num">Auslastung</th>
-              <th class="num">1 Monat geschrieben</th>
+              <th class="num">Observed</th>
+              <th class="num">Utilization</th>
+              <th class="num">Written, 1 month</th>
               <th class="num">Uptime</th>
             </tr>
           </thead>
           <tbody id="rows">
-            <tr><td colspan="8">Daten werden von Onionoo geladen.</td></tr>
+            <tr><td colspan="8">Loading data from Onionoo.</td></tr>
           </tbody>
         </table>
       </div>
@@ -307,49 +307,49 @@
 
     <section id="proof">
       <h2>Fingerprints</h2>
-      <p class="note">Dieselben vier Fingerprints stehen in <a href="/.well-known/tor-relay/rsa-fingerprint.txt">rsa-fingerprint.txt</a>. Die Contact-Zeile der Relais verweist mit <span class="mono">proof:uri-rsa</span> auf diese Website. Tor Metrics zeigt denselben Fingerprint mit Nickname, Adresse und Flags.</p>
+      <p class="note">The same four fingerprints are published in <a href="/.well-known/tor-relay/rsa-fingerprint.txt">rsa-fingerprint.txt</a>. Each relay's contact line points at this site with <span class="mono">proof:uri-rsa</span>. Tor Metrics shows the same fingerprint with the nickname, address, and flags.</p>
       <ul class="proof-list">
         <li data-fp="9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">
           <strong class="nick">RelayImmerscharf</strong>
           <code>9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0</code>
-          <button type="button" class="copy" data-copy="9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Kopieren</button>
+          <button type="button" class="copy" data-copy="9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Copy</button>
           <a href="https://metrics.torproject.org/rs.html#details/9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0" target="_blank" rel="noopener noreferrer">Metrics</a>
         </li>
         <li data-fp="8EC879F5955AD3DB5C13BCA686EE5967469B909C">
           <strong class="nick">RelayImmerscharf2</strong>
           <code>8EC879F5955AD3DB5C13BCA686EE5967469B909C</code>
-          <button type="button" class="copy" data-copy="8EC879F5955AD3DB5C13BCA686EE5967469B909C">Kopieren</button>
+          <button type="button" class="copy" data-copy="8EC879F5955AD3DB5C13BCA686EE5967469B909C">Copy</button>
           <a href="https://metrics.torproject.org/rs.html#details/8EC879F5955AD3DB5C13BCA686EE5967469B909C" target="_blank" rel="noopener noreferrer">Metrics</a>
         </li>
         <li data-fp="DFC5914896DB95DCE60F41426016B3DA315CFE73">
           <strong class="nick">RelayImmerscharf3</strong>
           <code>DFC5914896DB95DCE60F41426016B3DA315CFE73</code>
-          <button type="button" class="copy" data-copy="DFC5914896DB95DCE60F41426016B3DA315CFE73">Kopieren</button>
+          <button type="button" class="copy" data-copy="DFC5914896DB95DCE60F41426016B3DA315CFE73">Copy</button>
           <a href="https://metrics.torproject.org/rs.html#details/DFC5914896DB95DCE60F41426016B3DA315CFE73" target="_blank" rel="noopener noreferrer">Metrics</a>
         </li>
         <li data-fp="CC6728837411D8F3101881FB59B2AB606F068D75">
           <strong class="nick">RelayImmerscharf4</strong>
           <code>CC6728837411D8F3101881FB59B2AB606F068D75</code>
-          <button type="button" class="copy" data-copy="CC6728837411D8F3101881FB59B2AB606F068D75">Kopieren</button>
+          <button type="button" class="copy" data-copy="CC6728837411D8F3101881FB59B2AB606F068D75">Copy</button>
           <a href="https://metrics.torproject.org/rs.html#details/CC6728837411D8F3101881FB59B2AB606F068D75" target="_blank" rel="noopener noreferrer">Metrics</a>
         </li>
       </ul>
-      <p class="note">Die vier Relais bilden eine MyFamily. Tor setzt sie nicht gemeinsam in einen Circuit. Auslastung ist die beobachtete Bandbreite geteilt durch die in Tor gesetzte Rate. MB/s folgt der Tor-Konfiguration, also 1024² Bytes. Mbit/s ist die Einheit von Tor Metrics. Geschriebene und gelesene Mengen sind Summen aus der Onionoo-Historie: Mittelwert in Bytes pro Sekunde mal Intervall. Das ist die von Onionoo gelieferte Betriebszeit, kein interner Zähler in Tor. Die längste Historie ist je nach Alter ein 10-Tage-, 2-Tage- oder Tagesmittel.</p>
+      <p class="note">The four relays are one MyFamily, so Tor does not put them on the same circuit. Utilization is observed bandwidth divided by the rate configured in Tor. MB/s follows that configuration: 1024² bytes. Mbit/s is the unit Tor Metrics uses. Written and read totals sum the Onionoo history, average bytes per second times the interval. That is the operating period Onionoo still publishes, not a counter inside Tor. Depending on a relay's age, the longest history is a 10-day, 2-day, or daily average.</p>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <div>© 2026 Immerscharf · Daten von <a href="https://metrics.torproject.org/onionoo.html">Onionoo</a></div>
+      <div>© 2026 Immerscharf · Data from <a href="https://metrics.torproject.org/onionoo.html">Onionoo</a></div>
       <div>
-        <a href="https://metrics.torproject.org/rs.html#search/family:9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Family auf Tor Metrics</a>
+        <a href="https://metrics.torproject.org/rs.html#search/family:9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Family on Tor Metrics</a>
         · <a href="/.well-known/tor-relay/rsa-fingerprint.txt">.well-known</a>
       </div>
     </div>
     <div class="wrap">
       <details class="contact">
-        <summary>Contact-Zeile aus dem Deskriptor</summary>
-        <p class="mono" id="contact">wird geladen …</p>
+        <summary>Contact line from the descriptor</summary>
+        <p class="mono" id="contact">loading …</p>
       </details>
     </div>
   </footer>
@@ -362,9 +362,9 @@
       ["DFC5914896DB95DCE60F41426016B3DA315CFE73", "RelayImmerscharf3"],
       ["CC6728837411D8F3101881FB59B2AB606F068D75", "RelayImmerscharf4"]
     ];
-    const COUNTRY = { de: "Deutschland", es: "Spanien", fr: "Frankreich", nl: "Niederlande", at: "Österreich", ch: "Schweiz" };
+    const COUNTRY = { de: "Germany", es: "Spain", fr: "France", nl: "Netherlands", at: "Austria", ch: "Switzerland" };
     const SVG = "http://www.w3.org/2000/svg";
-    const nf = new Intl.NumberFormat("de-DE");
+    const nf = new Intl.NumberFormat("en-US");
 
     function el(tag, cls, text) {
       const n = document.createElement(tag);
@@ -381,12 +381,12 @@
     function fmtDay(s) {
       const d = s instanceof Date ? s : parseUtc(s);
       if (!d) return "–";
-      return d.toLocaleDateString("de-DE", { timeZone: "UTC", day: "2-digit", month: "2-digit", year: "numeric" });
+      return d.toLocaleDateString("en-US", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" });
     }
     function fmtWhen(s) {
       const d = parseUtc(s);
       if (!d) return "–";
-      return d.toLocaleString("de-DE", { timeZone: "UTC", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) + " UTC";
+      return d.toLocaleString("en-US", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }) + " UTC";
     }
     function fmtAgo(s) {
       const d = parseUtc(s);
@@ -395,14 +395,14 @@
       if (ms < 0) return fmtWhen(s);
       const h = Math.floor(ms / 3600000);
       const days = Math.floor(h / 24);
-      if (days >= 2) return days + " Tagen";
-      if (days === 1) return "1 Tag";
-      if (h >= 1) return h + " Std.";
-      return Math.max(1, Math.floor(ms / 60000)) + " Min.";
+      if (days >= 2) return days + " days";
+      if (days === 1) return "1 day";
+      if (h >= 1) return h + " h";
+      return Math.max(1, Math.floor(ms / 60000)) + " min";
     }
     function fmtNum(v, digits) {
       if (v == null || !Number.isFinite(v)) return "–";
-      return v.toLocaleString("de-DE", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+      return v.toLocaleString("en-US", { maximumFractionDigits: digits, minimumFractionDigits: digits });
     }
     function fmtMbit(bps) {
       if (bps == null || !Number.isFinite(bps)) return "–";
@@ -424,7 +424,7 @@
     }
     function fmtPct(fraction, digits) {
       if (fraction == null || !Number.isFinite(fraction)) return "–";
-      return fmtNum(fraction * 100, digits) + " %";
+      return fmtNum(fraction * 100, digits) + "%";
     }
     function integrate(h) {
       if (!h || !Array.isArray(h.values)) return null;
@@ -461,13 +461,13 @@
       return null;
     }
     function intervalLabel(sec) {
-      if (sec === 86400) return "Tagesmittel";
-      if (sec % 86400 === 0) return (sec / 86400) + "-Tage-Mittel";
-      if (sec % 3600 === 0) return (sec / 3600) + "-Stunden-Mittel";
-      return "Intervall " + sec + " s";
+      if (sec === 86400) return "daily average";
+      if (sec % 86400 === 0) return (sec / 86400) + "-day average";
+      if (sec % 3600 === 0) return (sec / 3600) + "-hour average";
+      return "interval " + sec + " s";
     }
     function histName(key) {
-      return { "5_years": "5-Jahres-Historie", "1_year": "1-Jahres-Historie", "6_months": "6-Monats-Historie", "1_month": "1-Monats-Historie" }[key] || key;
+      return { "5_years": "5-year history", "1_year": "1-year history", "6_months": "6-month history", "1_month": "1-month history" }[key] || key;
     }
     function splitAddr(list) {
       let v4 = "–", v6 = "–", port = "–";
@@ -506,7 +506,7 @@
       const useRead = aligned ? read : [];
       const nums = write.concat(useRead).filter((v) => v != null && Number.isFinite(v));
       if (nums.length < 2) {
-        wrap.append(el("p", "note", "Keine 1-Monats-Historie."));
+        wrap.append(el("p", "note", "No 1-month history."));
         return wrap;
       }
       const max = Math.max(...nums, 1) * 1.08;
@@ -518,7 +518,7 @@
       const svg = svgEl("svg");
       svg.setAttribute("viewBox", "0 0 " + w + " " + h);
       svg.setAttribute("role", "img");
-      svg.setAttribute("aria-label", "Schreib- und Leserate der letzten Monatshistorie in Mbit/s");
+      svg.setAttribute("aria-label", "Write and read rates for the 1-month history, in Mbit/s");
       for (const frac of [0, 0.5, 1]) {
         const yy = top + ih * frac;
         const line = svgEl("line");
@@ -578,11 +578,11 @@
       svg.append(hit);
       wrap.append(svg);
       const legend = el("div", "legend");
-      legend.append(el("span", "swatch write", "Schreiben"));
-      if (useRead.length) legend.append(el("span", "swatch read", "Lesen"));
-      legend.append(el("span", null, "Mbit/s, Tagesmittel"));
+      legend.append(el("span", "swatch write", "Written"));
+      if (useRead.length) legend.append(el("span", "swatch read", "Read"));
+      legend.append(el("span", null, "Mbit/s, daily average"));
       wrap.append(legend);
-      const readout = el("p", "readout", "Über den Verlauf fahren für den einzelnen Tag.");
+      const readout = el("p", "readout", "Hover the chart for a single day.");
       hit.addEventListener("pointermove", (ev) => {
         const rect = svg.getBoundingClientRect();
         const px = ((ev.clientX - rect.left) / rect.width) * w;
@@ -590,20 +590,20 @@
         i = Math.max(0, Math.min(n - 1, i));
         const start = writeH ? parseUtc(writeH.first) : null;
         const when = start ? fmtDay(new Date(start.getTime() + i * Number(writeH.interval) * 1000)) : "";
-        const readBit = useRead.length ? ", lesen " + fmtNum(useRead[i], 0) + " Mbit/s" : "";
-        readout.textContent = when + ": schreiben " + fmtNum(write[i], 0) + " Mbit/s" + readBit;
+        const readBit = useRead.length ? ", read " + fmtNum(useRead[i], 0) + " Mbit/s" : "";
+        readout.textContent = when + ": written " + fmtNum(write[i], 0) + " Mbit/s" + readBit;
       });
       wrap.append(readout);
       return wrap;
     }
     function overloadText(detail, bw) {
       const bits = [];
-      if (detail && detail.overload_general_timestamp) bits.push("allgemein " + fmtWhen(detail.overload_general_timestamp));
+      if (detail && detail.overload_general_timestamp) bits.push("general " + fmtWhen(detail.overload_general_timestamp));
       const rate = bw && bw.overload_ratelimits;
       const fd = bw && bw.overload_fd_exhausted;
-      if (rate && rate.timestamp) bits.push("Rate-Limit " + fmtWhen(rate.timestamp));
-      if (fd && fd.timestamp) bits.push("Dateideskriptoren " + fmtWhen(fd.timestamp));
-      return bits.length ? bits.join(" · ") : "keine";
+      if (rate && rate.timestamp) bits.push("rate limit " + fmtWhen(rate.timestamp));
+      if (fd && fd.timestamp) bits.push("file descriptors " + fmtWhen(fd.timestamp));
+      return bits.length ? bits.join(" · ") : "none";
     }
     function showError(msg) {
       const node = document.getElementById("error");
@@ -673,7 +673,7 @@
         jump.href = "#relay-" + row.fp;
         name.append(jump);
         const status = el("td");
-        status.append(el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "unbekannt")));
+        status.append(el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "unknown")));
         const tdLand = el("td", null, d.country ? String(d.country).toUpperCase() : "–");
         tdLand.title = land;
         const tdIp = el("td", "mono", addr.v4 === "–" ? "–" : addr.v4 + (addr.port !== "–" ? ":" + addr.port : ""));
@@ -712,12 +712,12 @@
           flags.append(chip);
         }
         titleBox.append(flags);
-        head.append(titleBox, el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "keine Onionoo-Daten")));
+        head.append(titleBox, el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "no Onionoo data")));
         art.append(head);
 
         const fpLine = el("div", "fp-line");
         fpLine.append(el("code", "fp", row.fp));
-        const copy = el("button", "copy", "Fingerprint kopieren");
+        const copy = el("button", "copy", "Copy fingerprint");
         copy.type = "button";
         copy.dataset.copy = row.fp;
         fpLine.append(copy);
@@ -726,7 +726,7 @@
         const v4line = el("div", "addr");
         v4line.append(el("span", null, "IPv4"), el("code", null, addr.v4 === "–" ? "–" : addr.v4 + ":" + addr.port));
         if (addr.v4 !== "–") {
-          const c4 = el("button", "copy", "Kopieren");
+          const c4 = el("button", "copy", "Copy");
           c4.type = "button";
           c4.dataset.copy = addr.v4;
           v4line.append(c4);
@@ -734,7 +734,7 @@
         const v6line = el("div", "addr");
         v6line.append(el("span", null, "IPv6"), el("code", null, addr.v6 === "–" ? "–" : "[" + addr.v6 + "]:" + addr.port));
         if (addr.v6 !== "–") {
-          const c6 = el("button", "copy", "Kopieren");
+          const c6 = el("button", "copy", "Copy");
           c6.type = "button";
           c6.dataset.copy = addr.v6;
           v6line.append(c6);
@@ -743,66 +743,66 @@
 
         const split = el("div", "split");
         const dl = el("dl", "facts");
-        fact(dl, "Gesetzte Rate", fmtMbit(d.bandwidth_rate) + " · " + fmtMiB(d.bandwidth_rate), "BandwidthRate aus dem Deskriptor");
+        fact(dl, "Configured rate", fmtMbit(d.bandwidth_rate) + " · " + fmtMiB(d.bandwidth_rate), "BandwidthRate from the descriptor");
         fact(dl, "Burst", fmtMbit(d.bandwidth_burst));
-        fact(dl, "Beobachtet", fmtMbit(d.observed_bandwidth) + " · " + fmtMiB(d.observed_bandwidth));
-        fact(dl, "Advertised", fmtMbit(d.advertised_bandwidth), "Minimum aus Rate, Burst und beobachteter Bandbreite");
-        fact(dl, "Auslastung", fmtPct(util, 1));
-        fact(dl, "Consensus-Gewicht", d.consensus_weight != null ? nf.format(d.consensus_weight) : "–");
-        fact(dl, "Anteil Netzwerk", fmtPct(d.consensus_weight_fraction, 4));
-        fact(dl, "Guard-Wahrscheinlichkeit", fmtPct(d.guard_probability, 4));
-        fact(dl, "Middle-Wahrscheinlichkeit", fmtPct(d.middle_probability, 4));
-        fact(dl, "Exit-Wahrscheinlichkeit", fmtPct(d.exit_probability, 2));
-        fact(dl, "Geschrieben, 1 Monat", monthWrite ? fmtBytes(monthWrite.bytes) : "–");
-        fact(dl, "Gelesen, 1 Monat", monthRead ? fmtBytes(monthRead.bytes) : "–");
-        fact(dl, "Geschrieben, erfasst", lifeWrite ? fmtBytes(lifeWrite.bytes) : "–", lifeWrite ? histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval) : "");
-        fact(dl, "Gelesen, erfasst", lifeRead ? fmtBytes(lifeRead.bytes) : "–");
-        fact(dl, "Uptime, 1 Monat", upMonth ? fmtPct(upMonth.fraction, 2) : "–");
-        fact(dl, "Uptime, erfasst", upLong ? fmtPct(upLong.fraction, 2) : "–");
-        fact(dl, "Erstmals gesehen", fmtWhen(d.first_seen));
-        fact(dl, "Zuletzt gesehen", fmtWhen(d.last_seen));
-        fact(dl, "Letzter Neustart", fmtWhen(d.last_restarted) + (d.last_restarted ? " · vor " + fmtAgo(d.last_restarted) : ""));
-        fact(dl, "Adresse gleich seit", fmtWhen(d.last_changed_address_or_port));
-        fact(dl, "Version", d.platform || "–", d.recommended_version ? "empfohlene Version" : (d.version_status || ""));
-        fact(dl, "Bandbreite gemessen", d.measured == null ? "–" : (d.measured ? "ja" : "nein"));
-        fact(dl, "Überlast", overloadText(d, bw));
+        fact(dl, "Observed", fmtMbit(d.observed_bandwidth) + " · " + fmtMiB(d.observed_bandwidth));
+        fact(dl, "Advertised", fmtMbit(d.advertised_bandwidth), "Minimum of rate, burst, and observed bandwidth");
+        fact(dl, "Utilization", fmtPct(util, 1));
+        fact(dl, "Consensus weight", d.consensus_weight != null ? nf.format(d.consensus_weight) : "–");
+        fact(dl, "Network share", fmtPct(d.consensus_weight_fraction, 4));
+        fact(dl, "Guard probability", fmtPct(d.guard_probability, 4));
+        fact(dl, "Middle probability", fmtPct(d.middle_probability, 4));
+        fact(dl, "Exit probability", fmtPct(d.exit_probability, 2));
+        fact(dl, "Written, 1 month", monthWrite ? fmtBytes(monthWrite.bytes) : "–");
+        fact(dl, "Read, 1 month", monthRead ? fmtBytes(monthRead.bytes) : "–");
+        fact(dl, "Written, recorded", lifeWrite ? fmtBytes(lifeWrite.bytes) : "–", lifeWrite ? histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval) : "");
+        fact(dl, "Read, recorded", lifeRead ? fmtBytes(lifeRead.bytes) : "–");
+        fact(dl, "Uptime, 1 month", upMonth ? fmtPct(upMonth.fraction, 2) : "–");
+        fact(dl, "Uptime, recorded", upLong ? fmtPct(upLong.fraction, 2) : "–");
+        fact(dl, "First seen", fmtWhen(d.first_seen));
+        fact(dl, "Last seen", fmtWhen(d.last_seen));
+        fact(dl, "Last restart", fmtWhen(d.last_restarted) + (d.last_restarted ? " · " + fmtAgo(d.last_restarted) + " ago" : ""));
+        fact(dl, "Address unchanged since", fmtWhen(d.last_changed_address_or_port));
+        fact(dl, "Version", d.platform || "–", d.recommended_version ? "recommended version" : (d.version_status || ""));
+        fact(dl, "Bandwidth measured", d.measured == null ? "–" : (d.measured ? "yes" : "no"));
+        fact(dl, "Overload", overloadText(d, bw));
         const host = (d.verified_host_names && d.verified_host_names[0]) || (d.unverified_host_names && d.unverified_host_names[0]) || "–";
         fact(dl, "Hostname", host);
         const policy = d.exit_policy_summary && d.exit_policy_summary.reject && d.exit_policy_summary.reject.indexOf("1-65535") !== -1
           ? "reject 1-65535"
-          : "siehe Metrics";
-        fact(dl, "Exit-Policy", policy);
+          : "see Metrics";
+        fact(dl, "Exit policy", policy);
         const right = el("div");
         right.append(el("p", "where", lifeWrite
-          ? "Erfasst " + fmtDay(lifeWrite.first) + " – " + fmtDay(lifeWrite.last) + " · " + histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval)
-          : "Keine Langzeit-Historie"));
+          ? "Recorded " + fmtDay(lifeWrite.first) + " – " + fmtDay(lifeWrite.last) + " · " + histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval)
+          : "No long-term history"));
         right.append(chart(bw.write_history && bw.write_history["1_month"], bw.read_history && bw.read_history["1_month"]));
         if (monthWrite) {
-          right.append(el("p", "note", "1 Monat geschrieben " + fmtBytes(monthWrite.bytes) + (monthRead ? ", gelesen " + fmtBytes(monthRead.bytes) : "") + " · " + fmtDay(monthWrite.first) + " – " + fmtDay(monthWrite.last)));
+          right.append(el("p", "note", "Written in 1 month " + fmtBytes(monthWrite.bytes) + (monthRead ? ", read " + fmtBytes(monthRead.bytes) : "") + " · " + fmtDay(monthWrite.first) + " – " + fmtDay(monthWrite.last)));
         }
         split.append(dl, right);
         art.append(split);
         const links = el("div", "links");
         links.append(linkOut("https://metrics.torproject.org/rs.html#details/" + row.fp, "Tor Metrics"));
-        links.append(linkOut("https://onionoo.torproject.org/details?lookup=" + row.fp, "Onionoo-Details"));
+        links.append(linkOut("https://onionoo.torproject.org/details?lookup=" + row.fp, "Onionoo details"));
         art.append(links);
         cards.append(art);
       }
 
       document.getElementById("s-online").textContent = online + "/4";
-      document.getElementById("s-online-sub").textContent = online === 4 ? "alle vier im Konsens" : online + " im aktuellen Konsens";
+      document.getElementById("s-online-sub").textContent = online === 4 ? "all four in the consensus" : online + " in the current consensus";
       document.getElementById("s-util").textContent = haveObs && rate > 0 ? fmtPct(obs / rate, 0) : "–";
-      document.getElementById("s-util-sub").textContent = haveObs ? fmtMiB(obs) + " von " + fmtMiB(rate) : "beobachtet / gesetzte Rate";
+      document.getElementById("s-util-sub").textContent = haveObs ? fmtMiB(obs) + " of " + fmtMiB(rate) : "observed / configured rate";
       document.getElementById("s-month").textContent = haveMonth ? fmtBytes(monthW) : "–";
-      document.getElementById("s-month-sub").textContent = haveMonthR ? "gelesen " + fmtBytes(monthR) : "Summe der Tageshistorie";
+      document.getElementById("s-month-sub").textContent = haveMonthR ? "read " + fmtBytes(monthR) : "sum of the daily history";
       document.getElementById("s-life").textContent = haveLife ? fmtBytes(lifeW) : "–";
-      document.getElementById("s-life-sub").textContent = haveLifeR ? "gelesen " + fmtBytes(lifeR) : "längste Historie je Relais";
+      document.getElementById("s-life-sub").textContent = haveLifeR ? "read " + fmtBytes(lifeR) : "longest history per relay";
       const published = (detailsDoc && detailsDoc.relays_published) || (bwDoc && bwDoc.relays_published);
       document.getElementById("stamp").textContent = published
-        ? "Onionoo-Stand " + fmtWhen(published) + " · abgerufen " + new Date().toLocaleString("de-DE")
-        : "Keine frischen Onionoo-Daten.";
+        ? "Onionoo published " + fmtWhen(published) + " · fetched " + new Date().toLocaleString("en-US", { hourCycle: "h23" })
+        : "No fresh Onionoo data.";
       const contact = detailList.find((d) => d.contact);
-      document.getElementById("contact").textContent = contact ? contact.contact : "keine Contact-Zeile geliefert";
+      document.getElementById("contact").textContent = contact ? contact.contact : "no contact line returned";
       const expected = new Set(FPS.map(([fp]) => fp));
       const familyOk = detailList.length === FPS.length && detailList.every((d) => {
         const set = new Set((d.effective_family || []).map((f) => String(f).toUpperCase()));
@@ -810,7 +810,7 @@
         for (const fp of expected) if (!set.has(fp)) return false;
         return true;
       });
-      if (detailList.length && !familyOk) showError("Die MyFamily in Onionoo enthält nicht genau diese vier Fingerprints.");
+      if (detailList.length && !familyOk) showError("The MyFamily in Onionoo does not contain exactly these four fingerprints.");
     }
     function linkOut(href, text) {
       const a = el("a", null, text);
@@ -821,7 +821,7 @@
     }
     async function getJson(url) {
       const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(res.status + " bei " + url);
+      if (!res.ok) throw new Error(res.status + " for " + url);
       return res.json();
     }
     async function load() {
@@ -832,12 +832,12 @@
       const jobs = ["details", "bandwidth", "uptime"].map((name) => getJson(base + name + "?lookup=" + lookup));
       const settled = await Promise.allSettled(jobs);
       const docs = settled.map((s) => s.status === "fulfilled" ? s.value : null);
-      const failed = settled.map((s, i) => s.status === "rejected" ? ["Details", "Bandbreite", "Uptime"][i] : null).filter(Boolean);
+      const failed = settled.map((s, i) => s.status === "rejected" ? ["Details", "Bandwidth", "Uptime"][i] : null).filter(Boolean);
       if (!docs[0] && !docs[1]) {
-        showError("Onionoo ist gerade nicht erreichbar. Die vier Fingerprints weiter unten bleiben gültig.");
-        document.getElementById("stamp").textContent = "Abruf fehlgeschlagen · " + new Date().toLocaleString("de-DE");
+        showError("Onionoo is unreachable right now. The four fingerprints below are still valid.");
+        document.getElementById("stamp").textContent = "Fetch failed · " + new Date().toLocaleString("en-US", { hourCycle: "h23" });
       } else if (failed.length) {
-        showError("Unvollständig: " + failed.join(", ") + " konnte nicht geladen werden.");
+        showError("Incomplete: " + failed.join(", ") + " could not be loaded.");
       } else {
         showError("");
       }
@@ -851,13 +851,13 @@
       try {
         await navigator.clipboard.writeText(button.dataset.copy);
         const toast = document.getElementById("toast");
-        toast.textContent = "Kopiert";
+        toast.textContent = "Copied";
         toast.classList.add("show");
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
       } catch (e) {
         const toast = document.getElementById("toast");
-        toast.textContent = "Kopieren nicht möglich";
+        toast.textContent = "Could not copy";
         toast.classList.add("show");
       }
     });
