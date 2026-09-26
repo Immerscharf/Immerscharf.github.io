@@ -1,484 +1,868 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immerscharf • Tor Relay</title>
-    <meta name="description" content="Official fingerprint proof for the Immerscharf Tor Relay.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-
-        :root {
-            --accent: #10b981;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system_ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e4e4e7;
-            line-height: 1.6;
-        }
-
-        .font-display {
-            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Navbar */
-        nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: #10b981;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-size: 11px;
-            font-weight: 500;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #e4e4e7;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #10b981;
-        }
-
-        /* Hero */
-        .hero {
-            padding-top: 120px;
-            padding-bottom: 80px;
-        }
-
-        .hero h1 {
-            font-size: 72px;
-            line-height: 1.05;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            margin-bottom: 24px;
-        }
-
-        .hero .gradient {
-            background: linear-gradient(90deg, #10b981, #14b8a6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 22px;
-            color: #a1a1aa;
-            max-width: 480px;
-            margin-bottom: 40px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: #10b981;
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #e4e4e7;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* Cards */
-        .glass {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 48px;
-        }
-
-        .section-header {
-            font-size: 42px;
-            line-height: 1.1;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            margin-bottom: 16px;
-        }
-
-        /* Fingerprint Box */
-        .fingerprint-box {
-            background: #111113;
-            border: 1px solid #27272a;
-            border-radius: 16px;
-            padding: 24px;
-            font-family: ui-monospace, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #10b981;
-            word-break: break-all;
-        }
-
-        .step {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 32px;
-            transition: transform 0.2s;
-        }
-
-        .step:hover {
-            transform: translateY(-4px);
-        }
-
-        .step-number {
-            width: 44px;
-            height: 44px;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: monospace;
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #10b981;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
-            z-index: 9999;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immerscharf · vier Tor-Relais</title>
+  <meta name="description" content="Live-Übersicht der vier Immerscharf-Tor-Relais: Fingerprints, Adressen, Auslastung und geschriebene Daten von Onionoo.">
+  <meta name="theme-color" content="#12140f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2312140f' width='32' height='32'/%3E%3Crect fill='%23e2ff6a' x='4' y='18' width='4' height='10'/%3E%3Crect fill='%23e2ff6a' x='11' y='12' width='4' height='16'/%3E%3Crect fill='%23e2ff6a' x='18' y='6' width='4' height='22'/%3E%3Crect fill='%23e2ff6a' x='25' y='14' width='4' height='14'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+  <style>
+    :root {
+      --bg: #12140f;
+      --surface: #191d15;
+      --surface-2: #20251b;
+      --line: #31382b;
+      --text: #e8eedf;
+      --muted: #a3ae96;
+      --dim: #6f7a66;
+      --accent: #e2ff6a;
+      --read: #8eb4ff;
+      --bad: #ff8d72;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: white; }
+    button, input { font: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: #141710;
+    }
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+      padding: 10px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+    .brand strong { font-weight: 600; letter-spacing: -0.03em; font-size: 18px; }
+    .mark { display: inline-flex; align-items: flex-end; gap: 3px; height: 22px; }
+    .mark i { display: block; width: 4px; background: var(--accent); }
+    .mark i:nth-child(1) { height: 8px; }
+    .mark i:nth-child(2) { height: 14px; }
+    .mark i:nth-child(3) { height: 22px; }
+    .mark i:nth-child(4) { height: 12px; }
+    nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    nav a:hover { color: var(--text); }
+    .reload {
+      background: var(--accent);
+      color: #17200a;
+      border: 0;
+      padding: 8px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .reload:disabled { opacity: 0.55; cursor: wait; }
+    .hero { padding: 36px 0 8px; }
+    .kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.045em; line-height: 1.05; font-weight: 600; }
+    .lede { max-width: 62ch; color: var(--muted); margin: 12px 0 0; }
+    .meta-line { color: var(--dim); font-family: var(--mono); font-size: 12px; margin: 14px 0 0; }
+    #error {
+      margin: 18px 0 0;
+      padding: 12px 14px;
+      border: 1px solid var(--bad);
+      color: var(--bad);
+      background: #2a1814;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 28px 0 18px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 14px 14px 12px;
+      min-height: 108px;
+    }
+    .stat span { display: block; color: var(--muted); font-size: 13px; }
+    .stat b {
+      display: block;
+      margin: 8px 0 4px;
+      font-family: var(--mono);
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat small { color: var(--dim); font-size: 12px; }
+    #meters { display: grid; gap: 8px; margin: 8px 0 28px; }
+    .meter-row { display: grid; grid-template-columns: 168px 1fr auto; gap: 12px; align-items: center; }
+    .meter-row .name { font-size: 14px; }
+    .meter { height: 8px; background: #2a3124; }
+    .meter i { display: block; height: 100%; background: var(--accent); }
+    .meter-row em { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+    h2 { font-size: 22px; letter-spacing: -0.03em; margin: 0 0 12px; font-weight: 600; }
+    .table-wrap { overflow-x: auto; max-width: 100%; border: 1px solid var(--line); margin-bottom: 28px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; white-space: nowrap; }
+    th { color: var(--dim); font-weight: 500; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; background: var(--surface-2); }
+    td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: #1d2219; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+    }
+    .is-off .pill { color: var(--bad); }
+    .is-off .pill::before { background: var(--bad); }
+    .mini { width: 72px; height: 6px; background: #2a3124; display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .mini i { display: block; height: 100%; background: var(--accent); }
+    .relay {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 22px;
+      margin: 0 0 14px;
+    }
+    .relay:nth-child(4n + 1) { border-top: 3px solid #e2ff6a; }
+    .relay:nth-child(4n + 2) { border-top: 3px solid #8eb4ff; }
+    .relay:nth-child(4n + 3) { border-top: 3px solid #ffb086; }
+    .relay:nth-child(4n + 4) { border-top: 3px solid #d7b4ff; }
+    .relay-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+    .relay h3 { margin: 0; font-size: 26px; letter-spacing: -0.04em; }
+    .where { color: var(--muted); margin: 4px 0 0; }
+    .flags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .flag {
+      border: 1px solid var(--line);
+      padding: 2px 7px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .flag.on { color: #17200a; background: var(--accent); border-color: var(--accent); }
+    .fp-line { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 14px 0; }
+    code, .mono { font-family: var(--mono); font-size: 13px; }
+    .fp { word-break: break-all; background: #10140c; padding: 6px 8px; border: 1px solid var(--line); }
+    .copy, .text-btn {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .copy:hover, .text-btn:hover { border-color: var(--accent); }
+    .split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 22px; }
+    .facts { display: grid; grid-template-columns: 1fr; margin: 0; }
+    .facts div { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 7px 0; }
+    .facts dt { color: var(--muted); font-size: 13px; }
+    .facts dd { margin: 0; font-family: var(--mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+    .addr { margin: 8px 0 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .chart svg { width: 100%; height: auto; display: block; background: #10140c; border: 1px solid var(--line); }
+    .axis { fill: #6f7a66; font: 11px var(--mono); }
+    .grid { stroke: #31382b; stroke-width: 1; }
+    .line { fill: none; stroke-width: 2; }
+    .line.write { stroke: var(--accent); }
+    .line.read { stroke: var(--read); }
+    .legend { display: flex; gap: 14px; color: var(--dim); font-size: 12px; margin-top: 8px; }
+    .swatch::before { content: ""; display: inline-block; width: 14px; height: 3px; margin-right: 6px; vertical-align: middle; }
+    .swatch.write::before { background: var(--accent); }
+    .swatch.read::before { background: var(--read); }
+    .readout { min-height: 1.4em; color: var(--muted); font-family: var(--mono); font-size: 12px; margin: 6px 0 0; }
+    .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-size: 14px; }
+    #proof { padding: 12px 0 28px; }
+    .proof-list { list-style: none; padding: 0; margin: 0; }
+    .proof-list li {
+      display: grid;
+      grid-template-columns: minmax(140px, 200px) 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .note { color: var(--dim); font-size: 13px; max-width: 85ch; }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 40px;
+      color: var(--dim);
+      font-size: 13px;
+    }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .contact { margin-top: 18px; }
+    .contact p { word-break: break-word; color: var(--muted); }
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #17200a;
+      padding: 10px 14px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .meter-row { grid-template-columns: 1fr; gap: 4px; }
+      .proof-list li { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; }
+      .bar { align-items: flex-start; flex-direction: column; }
+      .wrap { width: min(1120px, calc(100% - 24px)); }
+      .relay { padding: 16px; }
+      .facts div { flex-direction: column; align-items: flex-start; gap: 2px; }
+      .facts dd { text-align: left; }
+      .addr code, .fp { word-break: break-all; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav>
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-shield-halved text-white text-2xl"></i>
-                    </div>
-                    <span class="logo-text">immerscharf</span>
-                </div>
-
-                <div class="nav-links">
-                    <a href="#fingerprint">Fingerprint</a>
-                    <a href="#verify">Verify</a>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank">.well-known</a>
-                </div>
-
-                <a href="https://github.com/immerscharf" target="_blank" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;">
-                    <i class="fa-brands fa-github"></i>
-                    <span>GitHub</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO -->
-    <div class="hero">
-        <div class="container">
-            <div style="max-width: 620px;">
-                <div class="status" style="margin-bottom: 32px; width: fit-content;">
-                    <div class="status-dot"></div>
-                    <span>Tor Relay • Active since 2024</span>
-                </div>
-
-                <h1>IMMERSCHARF<br><span class="gradient">TOR RELAY</span></h1>
-                
-                <p>Official fingerprint proof.<br>100% transparent. 100% trustworthy.</p>
-
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="#fingerprint" class="btn btn-primary">
-                        <span>View Fingerprint</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" class="btn btn-secondary">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Download</span>
-                    </a>
-                </div>
-
-                <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px; color: #71717a; font-size: 14px;">
-                    <div style="display: flex; gap: -8px;">
-                        <div style="width: 24px; height: 24px; background: #27272a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #18181b;">
-                            <i class="fa-solid fa-lock" style="font-size: 11px;"></i>
-                        </div>
-                        <div style="width: 24px; height: 24px; background: #27272a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #18181b;">
-                            <i class="fa-solid fa-shield" style="font-size: 11px;"></i>
-                        </div>
-                    </div>
-                    <span>Verified by the Tor Network</span>
-                </div>
-            </div>
-        </div>
+  <header>
+    <div class="wrap bar">
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <strong>immerscharf</strong>
+      </a>
+      <nav>
+        <a href="#board">Relais</a>
+        <a href="#proof">Fingerprints</a>
+        <a href="https://github.com/Immerscharf/Immerscharf.github.io">Quelltext</a>
+        <button class="reload" id="reload" type="button">Aktualisieren</button>
+      </nav>
     </div>
+  </header>
 
-    <!-- ABOUT -->
-    <div class="container" style="padding-bottom: 80px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-            <div>
-                <div style="color: #10b981; font-size: 11px; letter-spacing: 2px; margin-bottom: 12px;">WHY THIS PAGE?</div>
-                <h2 class="section-header">The official proof<br>for my Tor Relay</h2>
-            </div>
-            <div style="color: #a1a1aa; font-size: 17px;">
-                This page is the <strong style="color: white;">single source of truth</strong> for the fingerprints of my Tor relay. 
-                Anyone can verify at any time that the published fingerprints truly belong to <span style="font-family: monospace; color: #10b981;">Immerscharf</span>.
-            </div>
-        </div>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <p class="kicker">Tor-Family</p>
+      <h1>Vier Tor-Relais</h1>
+      <p class="lede">Nickname, Fingerprint, Adressen, Auslastung und geschriebene Daten der vier Relais. Die Zahlen kommen direkt von Onionoo und bleiben damit auf dem Stand des Tor-Projekts.</p>
+      <p class="meta-line" id="stamp">Onionoo wird geladen …</p>
+      <p id="error" hidden></p>
+    </section>
+
+    <section class="stats" aria-label="Family gesamt">
+      <article class="stat"><span>Online</span><b id="s-online">…</b><small id="s-online-sub">von 4 Relais</small></article>
+      <article class="stat"><span>Auslastung</span><b id="s-util">…</b><small id="s-util-sub">beobachtet / gesetzte Rate</small></article>
+      <article class="stat"><span>Geschrieben, 1 Monat</span><b id="s-month">…</b><small id="s-month-sub">Summe der Tageshistorie</small></article>
+      <article class="stat"><span>Geschrieben, erfasst</span><b id="s-life">…</b><small id="s-life-sub">längste Historie je Relais</small></article>
+    </section>
+    <div id="meters"></div>
+
+    <section id="board">
+      <h2>Übersicht</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Relais</th>
+              <th>Status</th>
+              <th>Land</th>
+              <th>IPv4</th>
+              <th class="num">Beobachtet</th>
+              <th class="num">Auslastung</th>
+              <th class="num">1 Monat geschrieben</th>
+              <th class="num">Uptime</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="8">Daten werden von Onionoo geladen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="cards"></div>
+    </section>
+
+    <section id="proof">
+      <h2>Fingerprints</h2>
+      <p class="note">Dieselben vier Fingerprints stehen in <a href="/.well-known/tor-relay/rsa-fingerprint.txt">rsa-fingerprint.txt</a>. Die Contact-Zeile der Relais verweist mit <span class="mono">proof:uri-rsa</span> auf diese Website. Tor Metrics zeigt denselben Fingerprint mit Nickname, Adresse und Flags.</p>
+      <ul class="proof-list">
+        <li data-fp="9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">
+          <strong class="nick">RelayImmerscharf</strong>
+          <code>9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0</code>
+          <button type="button" class="copy" data-copy="9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Kopieren</button>
+          <a href="https://metrics.torproject.org/rs.html#details/9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0" target="_blank" rel="noopener noreferrer">Metrics</a>
+        </li>
+        <li data-fp="8EC879F5955AD3DB5C13BCA686EE5967469B909C">
+          <strong class="nick">RelayImmerscharf2</strong>
+          <code>8EC879F5955AD3DB5C13BCA686EE5967469B909C</code>
+          <button type="button" class="copy" data-copy="8EC879F5955AD3DB5C13BCA686EE5967469B909C">Kopieren</button>
+          <a href="https://metrics.torproject.org/rs.html#details/8EC879F5955AD3DB5C13BCA686EE5967469B909C" target="_blank" rel="noopener noreferrer">Metrics</a>
+        </li>
+        <li data-fp="DFC5914896DB95DCE60F41426016B3DA315CFE73">
+          <strong class="nick">RelayImmerscharf3</strong>
+          <code>DFC5914896DB95DCE60F41426016B3DA315CFE73</code>
+          <button type="button" class="copy" data-copy="DFC5914896DB95DCE60F41426016B3DA315CFE73">Kopieren</button>
+          <a href="https://metrics.torproject.org/rs.html#details/DFC5914896DB95DCE60F41426016B3DA315CFE73" target="_blank" rel="noopener noreferrer">Metrics</a>
+        </li>
+        <li data-fp="CC6728837411D8F3101881FB59B2AB606F068D75">
+          <strong class="nick">RelayImmerscharf4</strong>
+          <code>CC6728837411D8F3101881FB59B2AB606F068D75</code>
+          <button type="button" class="copy" data-copy="CC6728837411D8F3101881FB59B2AB606F068D75">Kopieren</button>
+          <a href="https://metrics.torproject.org/rs.html#details/CC6728837411D8F3101881FB59B2AB606F068D75" target="_blank" rel="noopener noreferrer">Metrics</a>
+        </li>
+      </ul>
+      <p class="note">Die vier Relais bilden eine MyFamily. Tor setzt sie nicht gemeinsam in einen Circuit. Auslastung ist die beobachtete Bandbreite geteilt durch die in Tor gesetzte Rate. MB/s folgt der Tor-Konfiguration, also 1024² Bytes. Mbit/s ist die Einheit von Tor Metrics. Geschriebene und gelesene Mengen sind Summen aus der Onionoo-Historie: Mittelwert in Bytes pro Sekunde mal Intervall. Das ist die von Onionoo gelieferte Betriebszeit, kein interner Zähler in Tor. Die längste Historie ist je nach Alter ein 10-Tage-, 2-Tage- oder Tagesmittel.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 Immerscharf · Daten von <a href="https://metrics.torproject.org/onionoo.html">Onionoo</a></div>
+      <div>
+        <a href="https://metrics.torproject.org/rs.html#search/family:9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0">Family auf Tor Metrics</a>
+        · <a href="/.well-known/tor-relay/rsa-fingerprint.txt">.well-known</a>
+      </div>
     </div>
-
-    <!-- FINGERPRINT -->
-    <div id="fingerprint" class="container" style="padding-bottom: 80px;">
-        <div class="glass">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 20px;">
-                <div>
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
-                        <i class="fa-solid fa-fingerprint" style="font-size: 36px; color: #10b981;"></i>
-                        <span style="font-size: 36px; font-weight: 700; letter-spacing: -0.03em;">RSA Fingerprint</span>
-                    </div>
-                    <p style="color: #71717a;">rsa-fingerprint.txt • .well-known/tor-relay</p>
-                </div>
-                
-                <div style="display: flex; gap: 12px;">
-                    <button onclick="copyFingerprintURL()" class="btn btn-secondary" style="padding: 12px 24px; font-size: 14px;">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Copy Link</span>
-                    </button>
-                    <button onclick="loadAndCopyFingerprint()" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px;">
-                        <i class="fa-solid fa-copy"></i>
-                        <span>Copy Fingerprint</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="fingerprint-box" id="fingerprint-content">
-                Click "Copy Fingerprint" or reload to load the latest value...
-            </div>
-            
-            <div style="margin-top: 16px; font-size: 12px; color: #52525b; display: flex; align-items: center; gap: 8px;">
-                <i class="fa-solid fa-info-circle"></i>
-                <span>This file is served directly from <span style="font-family: monospace;">immerscharf.github.io</span></span>
-            </div>
-        </div>
+    <div class="wrap">
+      <details class="contact">
+        <summary>Contact-Zeile aus dem Deskriptor</summary>
+        <p class="mono" id="contact">wird geladen …</p>
+      </details>
     </div>
+  </footer>
+  <div class="toast" id="toast" role="status"></div>
 
-    <!-- HOW TO VERIFY -->
-    <div id="verify" class="container" style="padding-bottom: 100px;">
-        <div style="text-align: center; margin-bottom: 48px;">
-            <div style="display: inline-block; background: rgba(255,255,255,0.05); padding: 6px 20px; border-radius: 9999px; font-size: 11px; letter-spacing: 1.5px; border: 1px solid rgba(255,255,255,0.1);">HOW IT WORKS</div>
-            <h2 class="section-header" style="margin-top: 20px;">How to verify the fingerprint</h2>
-        </div>
+  <script>
+    const FPS = [
+      ["9E1900A44B2AA98FF1ECE4A6640ADC586D0299F0", "RelayImmerscharf"],
+      ["8EC879F5955AD3DB5C13BCA686EE5967469B909C", "RelayImmerscharf2"],
+      ["DFC5914896DB95DCE60F41426016B3DA315CFE73", "RelayImmerscharf3"],
+      ["CC6728837411D8F3101881FB59B2AB606F068D75", "RelayImmerscharf4"]
+    ];
+    const COUNTRY = { de: "Deutschland", es: "Spanien", fr: "Frankreich", nl: "Niederlande", at: "Österreich", ch: "Schweiz" };
+    const SVG = "http://www.w3.org/2000/svg";
+    const nf = new Intl.NumberFormat("de-DE");
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-            <!-- Step 1 -->
-            <div class="step">
-                <div class="step-number">01</div>
-                <h3 style="font-size: 22px; margin-bottom: 12px;">Download the fingerprint</h3>
-                <p style="color: #a1a1aa;">Download the file <span style="font-family: monospace; background: #111113; padding: 2px 6px; border-radius: 4px;">rsa-fingerprint.txt</span> directly from this page.</p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="step">
-                <div class="step-number">02</div>
-                <h3 style="font-size: 22px; margin-bottom: 12px;">Add it to torrc</h3>
-                <p style="color: #a1a1aa;">Paste the fingerprint into your <span style="font-family: monospace;">torrc</span> configuration file.</p>
-                <div style="margin-top: 20px; background: #111113; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 13px; color: #10b981;">
-                    MyFamily &lt;FINGERPRINT&gt;
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="step">
-                <div class="step-number">03</div>
-                <h3 style="font-size: 22px; margin-bottom: 12px;">Check on Tor Metrics</h3>
-                <p style="color: #a1a1aa;">Go to <a href="https://metrics.torproject.org/" target="_blank" style="color: #10b981; text-decoration: underline;">metrics.torproject.org</a> and search for your relay.</p>
-                
-                <a href="https://metrics.torproject.org/rs.html" target="_blank" style="display: inline-flex; align-items: center; margin-top: 20px; color: #10b981; text-decoration: none; font-size: 14px;">
-                    Open Relay Search <i class="fa-solid fa-external-link-alt" style="margin-left: 6px; font-size: 12px;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- FINAL CTA -->
-    <div style="background: #111113; border-top: 1px solid rgba(255,255,255,0.1);">
-        <div class="container" style="padding: 80px 24px; text-align: center;">
-            <div style="max-width: 420px; margin: 0 auto;">
-                <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #14b8a6); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px;">
-                    <i class="fa-solid fa-globe" style="font-size: 32px; color: #0a0a0a;"></i>
-                </div>
-                
-                <h3 style="font-size: 28px; line-height: 1.2; margin-bottom: 16px;">Thank you for supporting<br>the Tor network.</h3>
-                <p style="color: #a1a1aa; font-size: 17px;">Every relay counts. Your contribution makes the internet more private and free.</p>
-                
-                <div style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://www.torproject.org/" target="_blank" class="btn btn-secondary">Learn more about Tor</a>
-                    <a href="https://immerscharf.github.io/.well-known/tor-relay/" target="_blank" class="btn btn-primary">Browse all files</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 32px 0; background: #0a0a0a;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #52525b; flex-wrap: wrap; gap: 16px;">
-            <div>© 2026 Immerscharf Tor Relay • Made with ❤️ for privacy</div>
-            <div style="display: flex; gap: 24px;">
-                <a href="#" style="color: #52525b; text-decoration: none;">Imprint</a>
-                <a href="#" style="color: #52525b; text-decoration: none;">Privacy</a>
-                <a href="https://github.com/immerscharf/immerscharf.github.io" target="_blank" style="color: #52525b; text-decoration: none;">Source</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        async function loadFingerprint() {
-            const container = document.getElementById('fingerprint-content');
-            container.innerHTML = '<span style="color:#10b981">Loading fingerprint...</span>';
-            
-            try {
-                const res = await fetch('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt');
-                const text = await res.text();
-                container.innerHTML = text.trim();
-                container.dataset.fp = text.trim();
-            } catch (e) {
-                container.innerHTML = 'Could not load automatically. <a href="https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt" target="_blank" style="color:#10b981">Open directly →</a>';
-            }
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function svgEl(tag) { return document.createElementNS(SVG, tag); }
+    function parseUtc(s) {
+      if (!s) return null;
+      const d = new Date(String(s).replace(" ", "T") + "Z");
+      return Number.isNaN(d.getTime()) ? null : d;
+    }
+    function fmtDay(s) {
+      const d = s instanceof Date ? s : parseUtc(s);
+      if (!d) return "–";
+      return d.toLocaleDateString("de-DE", { timeZone: "UTC", day: "2-digit", month: "2-digit", year: "numeric" });
+    }
+    function fmtWhen(s) {
+      const d = parseUtc(s);
+      if (!d) return "–";
+      return d.toLocaleString("de-DE", { timeZone: "UTC", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) + " UTC";
+    }
+    function fmtAgo(s) {
+      const d = parseUtc(s);
+      if (!d) return "–";
+      const ms = Date.now() - d.getTime();
+      if (ms < 0) return fmtWhen(s);
+      const h = Math.floor(ms / 3600000);
+      const days = Math.floor(h / 24);
+      if (days >= 2) return days + " Tagen";
+      if (days === 1) return "1 Tag";
+      if (h >= 1) return h + " Std.";
+      return Math.max(1, Math.floor(ms / 60000)) + " Min.";
+    }
+    function fmtNum(v, digits) {
+      if (v == null || !Number.isFinite(v)) return "–";
+      return v.toLocaleString("de-DE", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+    }
+    function fmtMbit(bps) {
+      if (bps == null || !Number.isFinite(bps)) return "–";
+      const m = bps * 8 / 1e6;
+      const d = m >= 100 ? 0 : 1;
+      return fmtNum(m, d) + " Mbit/s";
+    }
+    function fmtMiB(bps) {
+      if (bps == null || !Number.isFinite(bps)) return "–";
+      return fmtNum(bps / 1048576, 1) + " MB/s";
+    }
+    function fmtBytes(n) {
+      if (n == null || !Number.isFinite(n)) return "–";
+      const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+      let v = n, i = 0;
+      while (v >= 1000 && i < units.length - 1) { v /= 1000; i++; }
+      const d = v >= 100 || i === 0 ? 0 : 1;
+      return fmtNum(v, d) + " " + units[i];
+    }
+    function fmtPct(fraction, digits) {
+      if (fraction == null || !Number.isFinite(fraction)) return "–";
+      return fmtNum(fraction * 100, digits) + " %";
+    }
+    function integrate(h) {
+      if (!h || !Array.isArray(h.values)) return null;
+      let bytes = 0, n = 0;
+      for (const v of h.values) {
+        if (v == null) continue;
+        bytes += Number(v) * Number(h.factor) * Number(h.interval);
+        n++;
+      }
+      if (!n) return null;
+      return { bytes, first: h.first, last: h.last, points: n, interval: Number(h.interval) };
+    }
+    function pickLongest(obj) {
+      if (!obj) return null;
+      for (const key of ["5_years", "1_year", "6_months", "1_month"]) {
+        const hit = integrate(obj[key]);
+        if (hit) return Object.assign({ key }, hit);
+      }
+      return null;
+    }
+    function uptimeFraction(h) {
+      if (!h || !Array.isArray(h.values)) return null;
+      const vals = h.values.filter((v) => v != null).map(Number);
+      if (!vals.length) return null;
+      return vals.reduce((a, b) => a + b, 0) / vals.length * Number(h.factor);
+    }
+    function pickUptime(obj, preferShort) {
+      if (!obj) return null;
+      const keys = preferShort ? ["1_month", "6_months", "1_year", "5_years"] : ["5_years", "1_year", "6_months", "1_month"];
+      for (const key of keys) {
+        const frac = uptimeFraction(obj[key]);
+        if (frac != null) return { key, fraction: frac };
+      }
+      return null;
+    }
+    function intervalLabel(sec) {
+      if (sec === 86400) return "Tagesmittel";
+      if (sec % 86400 === 0) return (sec / 86400) + "-Tage-Mittel";
+      if (sec % 3600 === 0) return (sec / 3600) + "-Stunden-Mittel";
+      return "Intervall " + sec + " s";
+    }
+    function histName(key) {
+      return { "5_years": "5-Jahres-Historie", "1_year": "1-Jahres-Historie", "6_months": "6-Monats-Historie", "1_month": "1-Monats-Historie" }[key] || key;
+    }
+    function splitAddr(list) {
+      let v4 = "–", v6 = "–", port = "–";
+      for (const raw of list || []) {
+        if (String(raw).startsWith("[")) {
+          const m = String(raw).match(/^\[(.+)\]:(\d+)$/);
+          if (m) { v6 = m[1]; port = m[2]; }
+        } else {
+          const m = String(raw).match(/^([^:]+):(\d+)$/);
+          if (m) { v4 = m[1]; port = m[2]; }
         }
+      }
+      return { v4, v6, port };
+    }
+    function countryName(code, fallback) {
+      if (!code) return fallback || "–";
+      return COUNTRY[String(code).toLowerCase()] || fallback || String(code).toUpperCase();
+    }
+    function fact(dl, label, value, title) {
+      const wrap = el("div");
+      const dt = el("dt", null, label);
+      if (title) dt.title = title;
+      const dd = el("dd", null, value);
+      wrap.append(dt, dd);
+      dl.append(wrap);
+    }
+    function seriesMbit(h) {
+      if (!h || !Array.isArray(h.values)) return [];
+      return h.values.map((v) => v == null ? null : Number(v) * Number(h.factor) * 8 / 1e6);
+    }
+    function chart(writeH, readH) {
+      const wrap = el("div", "chart");
+      const write = seriesMbit(writeH);
+      const read = seriesMbit(readH);
+      const aligned = read.length === write.length && writeH && readH && readH.first === writeH.first && Number(readH.interval) === Number(writeH.interval);
+      const useRead = aligned ? read : [];
+      const nums = write.concat(useRead).filter((v) => v != null && Number.isFinite(v));
+      if (nums.length < 2) {
+        wrap.append(el("p", "note", "Keine 1-Monats-Historie."));
+        return wrap;
+      }
+      const max = Math.max(...nums, 1) * 1.08;
+      const w = 640, h = 168, left = 48, right = 8, top = 12, bottom = 22;
+      const iw = w - left - right, ih = h - top - bottom;
+      const n = write.length;
+      const x = (i) => left + (n === 1 ? iw / 2 : (i / (n - 1)) * iw);
+      const y = (v) => top + ih - (v / max) * ih;
+      const svg = svgEl("svg");
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", "Schreib- und Leserate der letzten Monatshistorie in Mbit/s");
+      for (const frac of [0, 0.5, 1]) {
+        const yy = top + ih * frac;
+        const line = svgEl("line");
+        line.setAttribute("x1", left);
+        line.setAttribute("x2", w - right);
+        line.setAttribute("y1", yy);
+        line.setAttribute("y2", yy);
+        line.setAttribute("class", "grid");
+        svg.append(line);
+        const label = svgEl("text");
+        label.setAttribute("x", left - 6);
+        label.setAttribute("y", yy + 3);
+        label.setAttribute("text-anchor", "end");
+        label.setAttribute("class", "axis");
+        label.textContent = nf.format(Math.round(max * (1 - frac)));
+        svg.append(label);
+      }
+      function path(arr) {
+        let d = "", pen = false;
+        arr.forEach((v, i) => {
+          if (v == null || !Number.isFinite(v)) { pen = false; return; }
+          d += (pen ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1) + " ";
+          pen = true;
+        });
+        return d.trim();
+      }
+      if (useRead.length) {
+        const pr = svgEl("path");
+        pr.setAttribute("d", path(useRead));
+        pr.setAttribute("class", "line read");
+        svg.append(pr);
+      }
+      const pw = svgEl("path");
+      pw.setAttribute("d", path(write));
+      pw.setAttribute("class", "line write");
+      svg.append(pw);
+      if (writeH) {
+        const a = svgEl("text");
+        a.setAttribute("x", left);
+        a.setAttribute("y", h - 4);
+        a.setAttribute("class", "axis");
+        a.textContent = fmtDay(writeH.first);
+        const b = svgEl("text");
+        b.setAttribute("x", w - right);
+        b.setAttribute("y", h - 4);
+        b.setAttribute("text-anchor", "end");
+        b.setAttribute("class", "axis");
+        b.textContent = fmtDay(writeH.last);
+        svg.append(a, b);
+      }
+      const hit = svgEl("rect");
+      hit.setAttribute("x", left);
+      hit.setAttribute("y", top);
+      hit.setAttribute("width", iw);
+      hit.setAttribute("height", ih);
+      hit.setAttribute("fill", "transparent");
+      svg.append(hit);
+      wrap.append(svg);
+      const legend = el("div", "legend");
+      legend.append(el("span", "swatch write", "Schreiben"));
+      if (useRead.length) legend.append(el("span", "swatch read", "Lesen"));
+      legend.append(el("span", null, "Mbit/s, Tagesmittel"));
+      wrap.append(legend);
+      const readout = el("p", "readout", "Über den Verlauf fahren für den einzelnen Tag.");
+      hit.addEventListener("pointermove", (ev) => {
+        const rect = svg.getBoundingClientRect();
+        const px = ((ev.clientX - rect.left) / rect.width) * w;
+        let i = Math.round(((px - left) / iw) * (n - 1));
+        i = Math.max(0, Math.min(n - 1, i));
+        const start = writeH ? parseUtc(writeH.first) : null;
+        const when = start ? fmtDay(new Date(start.getTime() + i * Number(writeH.interval) * 1000)) : "";
+        const readBit = useRead.length ? ", lesen " + fmtNum(useRead[i], 0) + " Mbit/s" : "";
+        readout.textContent = when + ": schreiben " + fmtNum(write[i], 0) + " Mbit/s" + readBit;
+      });
+      wrap.append(readout);
+      return wrap;
+    }
+    function overloadText(detail, bw) {
+      const bits = [];
+      if (detail && detail.overload_general_timestamp) bits.push("allgemein " + fmtWhen(detail.overload_general_timestamp));
+      const rate = bw && bw.overload_ratelimits;
+      const fd = bw && bw.overload_fd_exhausted;
+      if (rate && rate.timestamp) bits.push("Rate-Limit " + fmtWhen(rate.timestamp));
+      if (fd && fd.timestamp) bits.push("Dateideskriptoren " + fmtWhen(fd.timestamp));
+      return bits.length ? bits.join(" · ") : "keine";
+    }
+    function showError(msg) {
+      const node = document.getElementById("error");
+      node.hidden = !msg;
+      node.textContent = msg || "";
+    }
+    function render(detailsDoc, bwDoc, upDoc) {
+      const byFp = new Map();
+      for (const [fp, nick] of FPS) byFp.set(fp, { fp, nick });
+      const detailList = detailsDoc && detailsDoc.relays ? detailsDoc.relays : [];
+      const bwList = bwDoc && bwDoc.relays ? bwDoc.relays : [];
+      const upList = upDoc && upDoc.relays ? upDoc.relays : [];
+      for (const d of detailList) {
+        const fp = String(d.fingerprint || "").toUpperCase();
+        const row = byFp.get(fp);
+        if (row) row.detail = d;
+      }
+      for (const d of bwList) {
+        const fp = String(d.fingerprint || "").toUpperCase();
+        const row = byFp.get(fp);
+        if (row) row.bw = d;
+      }
+      for (const d of upList) {
+        const fp = String(d.fingerprint || "").toUpperCase();
+        const row = byFp.get(fp);
+        if (row) row.up = d;
+      }
+      const rows = FPS.map(([fp]) => byFp.get(fp));
+      let online = 0, obs = 0, rate = 0, monthW = 0, monthR = 0, lifeW = 0, lifeR = 0;
+      let haveObs = false, haveMonth = false, haveMonthR = false, haveLife = false, haveLifeR = false;
+      const tbody = document.getElementById("rows");
+      const cards = document.getElementById("cards");
+      const meters = document.getElementById("meters");
+      tbody.replaceChildren();
+      cards.replaceChildren();
+      meters.replaceChildren();
 
-        function copyFingerprintURL() {
-            navigator.clipboard.writeText('https://immerscharf.github.io/.well-known/tor-relay/rsa-fingerprint.txt')
-                .then(() => showToast('Link copied!'));
+      for (const row of rows) {
+        const d = row.detail || {};
+        const bw = row.bw || {};
+        const up = row.up || {};
+        const nick = d.nickname || row.nick;
+        document.querySelectorAll('[data-fp="' + row.fp + '"] .nick').forEach((n) => { n.textContent = nick; });
+        if (d.running) online += 1;
+        if (Number.isFinite(d.observed_bandwidth)) { obs += d.observed_bandwidth; haveObs = true; }
+        if (Number.isFinite(d.bandwidth_rate)) rate += d.bandwidth_rate;
+        const monthWrite = integrate(bw.write_history && bw.write_history["1_month"]);
+        const monthRead = integrate(bw.read_history && bw.read_history["1_month"]);
+        const lifeWrite = pickLongest(bw.write_history);
+        const lifeRead = pickLongest(bw.read_history);
+        const upMonth = pickUptime(up.uptime, true);
+        const upLong = pickUptime(up.uptime, false);
+        if (monthWrite) { monthW += monthWrite.bytes; haveMonth = true; }
+        if (monthRead) { monthR += monthRead.bytes; haveMonthR = true; }
+        if (lifeWrite) { lifeW += lifeWrite.bytes; haveLife = true; }
+        if (lifeRead) { lifeR += lifeRead.bytes; haveLifeR = true; }
+        const util = Number.isFinite(d.observed_bandwidth) && Number.isFinite(d.bandwidth_rate) && d.bandwidth_rate > 0
+          ? d.observed_bandwidth / d.bandwidth_rate : null;
+        const addr = splitAddr(d.or_addresses);
+        const land = countryName(d.country, d.country_name);
+
+        const tr = document.createElement("tr");
+        if (d.running === false) tr.className = "is-off";
+        const name = document.createElement("th");
+        name.scope = "row";
+        const jump = el("a", null, nick);
+        jump.href = "#relay-" + row.fp;
+        name.append(jump);
+        const status = el("td");
+        status.append(el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "unbekannt")));
+        const tdLand = el("td", null, d.country ? String(d.country).toUpperCase() : "–");
+        tdLand.title = land;
+        const tdIp = el("td", "mono", addr.v4 === "–" ? "–" : addr.v4 + (addr.port !== "–" ? ":" + addr.port : ""));
+        const tdObs = el("td", "num", fmtMbit(d.observed_bandwidth));
+        const tdUtil = el("td", "num");
+        const mini = el("span", "mini");
+        const bar = el("i");
+        bar.style.width = Math.max(0, Math.min(100, (util || 0) * 100)) + "%";
+        mini.append(bar);
+        tdUtil.append(mini, document.createTextNode(fmtPct(util, 0)));
+        const tdMonth = el("td", "num", monthWrite ? fmtBytes(monthWrite.bytes) : "–");
+        const tdUp = el("td", "num", upMonth ? fmtPct(upMonth.fraction, 1) : "–");
+        tr.append(name, status, tdLand, tdIp, tdObs, tdUtil, tdMonth, tdUp);
+        tbody.append(tr);
+
+        const meter = el("div", "meter-row");
+        const meterName = el("a", "name", nick);
+        meterName.href = "#relay-" + row.fp;
+        const track = el("div", "meter");
+        const fill = el("i");
+        fill.style.width = Math.max(0, Math.min(100, (util || 0) * 100)) + "%";
+        track.append(fill);
+        meter.append(meterName, track, el("em", null, (util == null ? "–" : fmtPct(util, 0)) + " · " + fmtMiB(d.observed_bandwidth)));
+        meters.append(meter);
+
+        const art = el("article", "relay");
+        art.id = "relay-" + row.fp;
+        if (d.running === false) art.classList.add("is-off");
+        const head = el("div", "relay-head");
+        const titleBox = el("div");
+        titleBox.append(el("h3", null, nick));
+        titleBox.append(el("p", "where", land + (d.as_name ? " · " + d.as_name : "") + (d.as ? " " + d.as : "")));
+        const flags = el("div", "flags");
+        for (const flag of d.flags || []) {
+          const chip = el("span", "flag" + (flag === "Guard" || flag === "Running" ? " on" : ""), flag);
+          flags.append(chip);
         }
+        titleBox.append(flags);
+        head.append(titleBox, el("span", "pill", d.running ? "online" : (d.fingerprint ? "offline" : "keine Onionoo-Daten")));
+        art.append(head);
 
-        async function loadAndCopyFingerprint() {
-            const container = document.getElementById('fingerprint-content');
-            if (!container.dataset.fp) await loadFingerprint();
-            
-            const fp = container.dataset.fp || container.textContent.trim();
-            navigator.clipboard.writeText(fp).then(() => showToast('Fingerprint copied!'));
+        const fpLine = el("div", "fp-line");
+        fpLine.append(el("code", "fp", row.fp));
+        const copy = el("button", "copy", "Fingerprint kopieren");
+        copy.type = "button";
+        copy.dataset.copy = row.fp;
+        fpLine.append(copy);
+        art.append(fpLine);
+
+        const v4line = el("div", "addr");
+        v4line.append(el("span", null, "IPv4"), el("code", null, addr.v4 === "–" ? "–" : addr.v4 + ":" + addr.port));
+        if (addr.v4 !== "–") {
+          const c4 = el("button", "copy", "Kopieren");
+          c4.type = "button";
+          c4.dataset.copy = addr.v4;
+          v4line.append(c4);
         }
-
-        function showToast(msg) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>${msg}</span>`;
-            document.body.appendChild(toast);
-            setTimeout(() => {
-                toast.style.transition = 'all 0.3s';
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 2200);
+        const v6line = el("div", "addr");
+        v6line.append(el("span", null, "IPv6"), el("code", null, addr.v6 === "–" ? "–" : "[" + addr.v6 + "]:" + addr.port));
+        if (addr.v6 !== "–") {
+          const c6 = el("button", "copy", "Kopieren");
+          c6.type = "button";
+          c6.dataset.copy = addr.v6;
+          v6line.append(c6);
         }
+        art.append(v4line, v6line);
 
-        // Auto-load fingerprint
-        setTimeout(() => {
-            const el = document.getElementById('fingerprint-content');
-            if (el && el.textContent.includes('Click')) {
-                loadFingerprint();
-            }
-        }, 700);
-    </script>
+        const split = el("div", "split");
+        const dl = el("dl", "facts");
+        fact(dl, "Gesetzte Rate", fmtMbit(d.bandwidth_rate) + " · " + fmtMiB(d.bandwidth_rate), "BandwidthRate aus dem Deskriptor");
+        fact(dl, "Burst", fmtMbit(d.bandwidth_burst));
+        fact(dl, "Beobachtet", fmtMbit(d.observed_bandwidth) + " · " + fmtMiB(d.observed_bandwidth));
+        fact(dl, "Advertised", fmtMbit(d.advertised_bandwidth), "Minimum aus Rate, Burst und beobachteter Bandbreite");
+        fact(dl, "Auslastung", fmtPct(util, 1));
+        fact(dl, "Consensus-Gewicht", d.consensus_weight != null ? nf.format(d.consensus_weight) : "–");
+        fact(dl, "Anteil Netzwerk", fmtPct(d.consensus_weight_fraction, 4));
+        fact(dl, "Guard-Wahrscheinlichkeit", fmtPct(d.guard_probability, 4));
+        fact(dl, "Middle-Wahrscheinlichkeit", fmtPct(d.middle_probability, 4));
+        fact(dl, "Exit-Wahrscheinlichkeit", fmtPct(d.exit_probability, 2));
+        fact(dl, "Geschrieben, 1 Monat", monthWrite ? fmtBytes(monthWrite.bytes) : "–");
+        fact(dl, "Gelesen, 1 Monat", monthRead ? fmtBytes(monthRead.bytes) : "–");
+        fact(dl, "Geschrieben, erfasst", lifeWrite ? fmtBytes(lifeWrite.bytes) : "–", lifeWrite ? histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval) : "");
+        fact(dl, "Gelesen, erfasst", lifeRead ? fmtBytes(lifeRead.bytes) : "–");
+        fact(dl, "Uptime, 1 Monat", upMonth ? fmtPct(upMonth.fraction, 2) : "–");
+        fact(dl, "Uptime, erfasst", upLong ? fmtPct(upLong.fraction, 2) : "–");
+        fact(dl, "Erstmals gesehen", fmtWhen(d.first_seen));
+        fact(dl, "Zuletzt gesehen", fmtWhen(d.last_seen));
+        fact(dl, "Letzter Neustart", fmtWhen(d.last_restarted) + (d.last_restarted ? " · vor " + fmtAgo(d.last_restarted) : ""));
+        fact(dl, "Adresse gleich seit", fmtWhen(d.last_changed_address_or_port));
+        fact(dl, "Version", d.platform || "–", d.recommended_version ? "empfohlene Version" : (d.version_status || ""));
+        fact(dl, "Bandbreite gemessen", d.measured == null ? "–" : (d.measured ? "ja" : "nein"));
+        fact(dl, "Überlast", overloadText(d, bw));
+        const host = (d.verified_host_names && d.verified_host_names[0]) || (d.unverified_host_names && d.unverified_host_names[0]) || "–";
+        fact(dl, "Hostname", host);
+        const policy = d.exit_policy_summary && d.exit_policy_summary.reject && d.exit_policy_summary.reject.indexOf("1-65535") !== -1
+          ? "reject 1-65535"
+          : "siehe Metrics";
+        fact(dl, "Exit-Policy", policy);
+        const right = el("div");
+        right.append(el("p", "where", lifeWrite
+          ? "Erfasst " + fmtDay(lifeWrite.first) + " – " + fmtDay(lifeWrite.last) + " · " + histName(lifeWrite.key) + ", " + intervalLabel(lifeWrite.interval)
+          : "Keine Langzeit-Historie"));
+        right.append(chart(bw.write_history && bw.write_history["1_month"], bw.read_history && bw.read_history["1_month"]));
+        if (monthWrite) {
+          right.append(el("p", "note", "1 Monat geschrieben " + fmtBytes(monthWrite.bytes) + (monthRead ? ", gelesen " + fmtBytes(monthRead.bytes) : "") + " · " + fmtDay(monthWrite.first) + " – " + fmtDay(monthWrite.last)));
+        }
+        split.append(dl, right);
+        art.append(split);
+        const links = el("div", "links");
+        links.append(linkOut("https://metrics.torproject.org/rs.html#details/" + row.fp, "Tor Metrics"));
+        links.append(linkOut("https://onionoo.torproject.org/details?lookup=" + row.fp, "Onionoo-Details"));
+        art.append(links);
+        cards.append(art);
+      }
+
+      document.getElementById("s-online").textContent = online + "/4";
+      document.getElementById("s-online-sub").textContent = online === 4 ? "alle vier im Konsens" : online + " im aktuellen Konsens";
+      document.getElementById("s-util").textContent = haveObs && rate > 0 ? fmtPct(obs / rate, 0) : "–";
+      document.getElementById("s-util-sub").textContent = haveObs ? fmtMiB(obs) + " von " + fmtMiB(rate) : "beobachtet / gesetzte Rate";
+      document.getElementById("s-month").textContent = haveMonth ? fmtBytes(monthW) : "–";
+      document.getElementById("s-month-sub").textContent = haveMonthR ? "gelesen " + fmtBytes(monthR) : "Summe der Tageshistorie";
+      document.getElementById("s-life").textContent = haveLife ? fmtBytes(lifeW) : "–";
+      document.getElementById("s-life-sub").textContent = haveLifeR ? "gelesen " + fmtBytes(lifeR) : "längste Historie je Relais";
+      const published = (detailsDoc && detailsDoc.relays_published) || (bwDoc && bwDoc.relays_published);
+      document.getElementById("stamp").textContent = published
+        ? "Onionoo-Stand " + fmtWhen(published) + " · abgerufen " + new Date().toLocaleString("de-DE")
+        : "Keine frischen Onionoo-Daten.";
+      const contact = detailList.find((d) => d.contact);
+      document.getElementById("contact").textContent = contact ? contact.contact : "keine Contact-Zeile geliefert";
+      const expected = new Set(FPS.map(([fp]) => fp));
+      const familyOk = detailList.length === FPS.length && detailList.every((d) => {
+        const set = new Set((d.effective_family || []).map((f) => String(f).toUpperCase()));
+        if (set.size !== expected.size) return false;
+        for (const fp of expected) if (!set.has(fp)) return false;
+        return true;
+      });
+      if (detailList.length && !familyOk) showError("Die MyFamily in Onionoo enthält nicht genau diese vier Fingerprints.");
+    }
+    function linkOut(href, text) {
+      const a = el("a", null, text);
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      return a;
+    }
+    async function getJson(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(res.status + " bei " + url);
+      return res.json();
+    }
+    async function load() {
+      const button = document.getElementById("reload");
+      button.disabled = true;
+      const lookup = FPS.map(([fp]) => fp).join(",");
+      const base = "https://onionoo.torproject.org/";
+      const jobs = ["details", "bandwidth", "uptime"].map((name) => getJson(base + name + "?lookup=" + lookup));
+      const settled = await Promise.allSettled(jobs);
+      const docs = settled.map((s) => s.status === "fulfilled" ? s.value : null);
+      const failed = settled.map((s, i) => s.status === "rejected" ? ["Details", "Bandbreite", "Uptime"][i] : null).filter(Boolean);
+      if (!docs[0] && !docs[1]) {
+        showError("Onionoo ist gerade nicht erreichbar. Die vier Fingerprints weiter unten bleiben gültig.");
+        document.getElementById("stamp").textContent = "Abruf fehlgeschlagen · " + new Date().toLocaleString("de-DE");
+      } else if (failed.length) {
+        showError("Unvollständig: " + failed.join(", ") + " konnte nicht geladen werden.");
+      } else {
+        showError("");
+      }
+      render(docs[0], docs[1], docs[2]);
+      button.disabled = false;
+    }
+    let toastTimer;
+    document.body.addEventListener("click", async (ev) => {
+      const button = ev.target.closest("[data-copy]");
+      if (!button) return;
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy);
+        const toast = document.getElementById("toast");
+        toast.textContent = "Kopiert";
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+      } catch (e) {
+        const toast = document.getElementById("toast");
+        toast.textContent = "Kopieren nicht möglich";
+        toast.classList.add("show");
+      }
+    });
+    document.getElementById("reload").addEventListener("click", load);
+    load();
+  </script>
 </body>
 </html>
